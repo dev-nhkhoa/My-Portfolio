@@ -213,7 +213,13 @@ target profile links back. This phase is Khoa's to execute, not code.
 
 Phase 0 — Indexation
 
-- [ ] Verify domain in Google Search Console via DNS TXT
+- [ ] Verify domain in Google Search Console via DNS TXT.
+      NOTE: a `google-site-verification` TXT record already exists in DNS
+      (`yHKl17kJQDYlxM9vWbkn2s6jEKHNGPhrQFDR7J_8NcA`), so a property may already
+      exist. If verified but unindexed, the cause was almost certainly the
+      apex/www redirect defect fixed in Phase 1 — Google would have logged
+      "Page with redirect" and declined to index. DNS is at Tenten.vn, not
+      Vercel, so any new TXT record goes in the Tenten control panel.
 - [ ] Read Pages report; record the actual reason for non-indexation
 - [ ] Verify Bing Webmaster Tools
 - [ ] Submit sitemap to both; request indexing for `/`
@@ -224,16 +230,19 @@ Phase 1 — Host + deploy
       Vercel REST API `PATCH /v9/projects/:id/domains/:domain`; the CLI has no
       command for redirect direction. Apex now 200 with 0 redirects, TTFB
       1.46s → 0.24s.
-- [ ] Confirm `APP_URL` env is unset or apex
-- [ ] Merge + deploy `feat/graduation-update`
+- [x] Confirm `APP_URL` env is unset or apex — no env vars set on the project,
+      so `SITE_INFO.url` falls back to the apex
+- [x] Merge + deploy `feat/graduation-update` — fast-forwarded to `main` at
+      `df1ba98`, deployed to production and verified live
 - [x] Verify apex returns 200 and canonical matches served host
 
 Phase 2 — Entity graph + AI access
 
 - [x] Unblock AI layer in `robots.ts`; add `Google-Extended: Allow` — `0d005b1`
-- [ ] **Obtain Facebook + Instagram URLs from Khoa** ← blocking the goal's
-      cross-platform half; not present anywhere in the repo
-- [ ] Add FB + IG to `social-links.ts` (flows into `sameAs` automatically)
+- [x] Obtain Facebook + Instagram URLs from Khoa — both `nhkhoa.a`, matching
+      `USER.username`
+- [x] Add FB + IG to `social-links.ts` (flows into `sameAs` automatically) —
+      `4d505a2`; created matching 25x25 icons
 - [x] Expand `Person` schema (`sameAs`, `worksFor`, `alumniOf`, `alternateName`,
       `knowsAbout`, `address`, `nationality`) — `0d005b1`
 - [x] Fix profession/registry copy in both llms routes; derive from `USER` —
