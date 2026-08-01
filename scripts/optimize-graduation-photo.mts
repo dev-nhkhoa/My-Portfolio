@@ -1,6 +1,7 @@
 // scripts/optimize-graduation-photo.mts
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
+
 import sharp from "sharp";
 
 const SRC = "public/images/me-graduate.png";
