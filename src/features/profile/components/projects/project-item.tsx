@@ -32,6 +32,7 @@ export async function ProjectItem({
   const isOngoing = !end;
   const t = await getTranslations("a11y");
   const locale = (await getLocale()) as Locale;
+  const title = resolveLocalized(project.title, locale);
   const description = project.description
     ? resolveLocalized(project.description, locale)
     : undefined;
@@ -41,16 +42,41 @@ export async function ProjectItem({
       <div className={className}>
         <div className="flex items-center hover:bg-accent2">
           {project.logo ? (
-            <Image
-              src={project.logo}
-              alt={project.title}
-              width={32}
-              height={32}
-              quality={100}
-              className="mx-4 flex size-6 shrink-0 select-none"
-              unoptimized
-              aria-hidden="true"
-            />
+            project.logoDark ? (
+              <>
+                <Image
+                  src={project.logo}
+                  alt={title}
+                  width={32}
+                  height={32}
+                  quality={100}
+                  className="mx-4 flex size-6 shrink-0 rounded-md select-none dark:hidden"
+                  unoptimized
+                  aria-hidden="true"
+                />
+                <Image
+                  src={project.logoDark}
+                  alt={title}
+                  width={32}
+                  height={32}
+                  quality={100}
+                  className="mx-4 hidden size-6 shrink-0 rounded-md select-none dark:flex"
+                  unoptimized
+                  aria-hidden="true"
+                />
+              </>
+            ) : (
+              <Image
+                src={project.logo}
+                alt={title}
+                width={32}
+                height={32}
+                quality={100}
+                className="mx-4 flex size-6 shrink-0 select-none"
+                unoptimized
+                aria-hidden="true"
+              />
+            )
           ) : (
             <div
               className="mx-4 flex size-6 shrink-0 items-center justify-center rounded-lg border border-muted-foreground/15 bg-muted text-muted-foreground ring-1 ring-edge ring-offset-1 ring-offset-background select-none"
@@ -64,7 +90,7 @@ export async function ProjectItem({
             <CollapsibleTrigger className="flex w-full items-center gap-4 p-4 pr-2 text-left select-none">
               <div className="flex-1">
                 <h3 className="mb-1 leading-snug font-medium text-balance">
-                  {project.title}
+                  {title}
                 </h3>
 
                 <dl className="text-sm text-muted-foreground">

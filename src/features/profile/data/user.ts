@@ -3,20 +3,23 @@ import type { User } from "@/features/profile/types/user";
 export const USER: User = {
   firstName: "Khoa",
   lastName: "Truong Nguyen Anh",
-  displayName: "Truong Nguyen Anh Khoa",
+  displayName: "Khoa Truong Nguyen Anh",
   username: "nhkhoa.a",
   gender: "male",
   pronouns: "he/him",
   bio: {
-    en: "AI Workflow & Automation Engineer | Building intelligent workflows",
-    vi: "Kỹ sư Tự động hóa & Quy trình AI | Xây dựng các quy trình thông minh",
+    en: "AI Workflow & Automation Engineer",
+    vi: "AI Workflow & Automation Engineer",
   },
   timeZone: "Asia/Ho_Chi_Minh",
   flipSentences: {
-    en: ["AI Workflow & Automation Engineer", "Building intelligent workflows"],
+    en: [
+      "AI Workflow & Automation Engineer",
+      "Building [@Sakura - Voice Expense Tracker](https://sakuramoney.app)",
+    ],
     vi: [
-      "Kỹ sư Tự động hóa & Quy trình AI",
-      "Xây dựng các quy trình thông minh",
+      "AI Workflow & Automation Engineer",
+      "Đang phát triển app [@Sakura - Voice Expense Tracker](https://sakuramoney.app)",
     ],
   },
   address: "Ho Chi Minh City, Vietnam",
@@ -25,47 +28,40 @@ export const USER: User = {
   website: "https://nhkhoa.site",
   jobTitle: {
     en: "AI Workflow & Automation Engineer",
-    vi: "Kỹ sư Tự động hóa & Quy trình AI",
+    vi: "AI Workflow & Automation Engineer",
   },
   jobs: [
     {
       title: {
         en: "AI Workflow & Automation Engineer",
-        vi: "Kỹ sư Tự động hóa & Quy trình AI",
+        vi: "AI Workflow & Automation Engineer",
       },
-      company: "VML",
+      company: "VML Vietnam",
       website: "https://www.vml.com/vietnam",
     },
     {
       title: {
-        en: "Graduate",
-        vi: "Cử nhân",
+        en: "Graduated",
+        vi: "Tốt nghiệp",
       },
       company: "Van Lang University",
       website: "https://vlu.edu.vn/",
     },
   ],
   about: {
-    en: `
-- **AI Workflow & Automation Engineer** at VML, graduated from Van Lang University, with a passion for building intelligent workflows that save time and boost productivity
-- Now at **22 years old**, excited to build a career at the intersection of AI and practical business solutions
-- **Skills**: JavaScript/TypeScript, LangChain, OpenAI API, Claude Code, Workflow Automation tools (n8n, Zapier, Make.com)
-- **Mission**: Democratizing AI automation for everyone, one workflow at a time
-`,
-    vi: `
-- **Kỹ sư Tự động hóa & Quy trình AI** tại VML, tốt nghiệp Trường Đại học Văn Lang, với niềm đam mê xây dựng các quy trình thông minh giúp tiết kiệm thời gian và nâng cao năng suất
-- Hiện **22 tuổi**, hào hứng xây dựng sự nghiệp tại giao điểm giữa AI và các giải pháp kinh doanh thực tiễn
-- **Kỹ năng**: JavaScript/TypeScript, LangChain, OpenAI API, Claude Code, các công cụ Tự động hóa Quy trình (n8n, Zapier, Make.com)
-- **Sứ mệnh**: Phổ cập tự động hóa AI cho mọi người, từng quy trình một
-`,
+    en: `**AI Workflow & Automation Engineer** at VML`,
+    vi: `**AI Workflow & Automation Engineer** at VML`,
   },
   avatar: "/images/me.png",
   ogImage: "/images/og-image-light.png",
   namePronunciationUrl: "", // Add audio file for name pronunciation if available
   keywords: [
     "Truong Nguyen Anh Khoa",
-    "Truong Nguyen Anh Khoa",
+    "Khoa Truong Nguyen Anh",
     "Trương Nguyễn Anh Khoa",
+    "Khoa Trương Nguyễn Anh",
+    "Khoa Truong",
+    "Khoa Truong VML",
     "nhkhoa",
     "nhkhoa.a",
     "Khoa AI",
@@ -73,6 +69,7 @@ export const USER: User = {
     "Khoa Van Lang",
     "Khoa CNTT",
     "Khoa HTTT",
+    "Khoa VMK",
     "ai workflow automation engineer",
     "ai automation developer",
     "ai developer vietnam",

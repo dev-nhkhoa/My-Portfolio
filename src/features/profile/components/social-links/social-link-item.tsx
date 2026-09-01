@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 
 export function SocialLinkItem({
   icon,
+  iconDark,
+  invertOnDark,
   title,
   description,
   href,
@@ -23,15 +25,48 @@ export function SocialLinkItem({
       rel="noopener"
     >
       <div className="relative size-12 shrink-0">
-        <Image
-          className={`rounded-xl object-contain ${padding && "p-[7px]"}`}
-          src={icon}
-          alt={title}
-          width={48}
-          height={48}
-          quality={100}
-          unoptimized
-        />
+        {iconDark ? (
+          <>
+            <Image
+              className={cn(
+                "rounded-xl object-contain dark:hidden",
+                padding && "p-[7px]"
+              )}
+              src={icon}
+              alt={title}
+              width={48}
+              height={48}
+              quality={100}
+              unoptimized
+            />
+            <Image
+              className={cn(
+                "hidden rounded-xl object-contain dark:block",
+                padding && "p-[7px]"
+              )}
+              src={iconDark}
+              alt={title}
+              width={48}
+              height={48}
+              quality={100}
+              unoptimized
+            />
+          </>
+        ) : (
+          <Image
+            className={cn(
+              "rounded-xl object-contain",
+              padding && "p-[7px]",
+              invertOnDark && "dark:invert"
+            )}
+            src={icon}
+            alt={title}
+            width={48}
+            height={48}
+            quality={100}
+            unoptimized
+          />
+        )}
         <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-black/10 ring-inset dark:ring-white/10" />
       </div>
 

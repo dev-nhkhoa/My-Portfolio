@@ -1,8 +1,8 @@
+import type { Localized } from "@/i18n/localized";
+
 export type ExperiencePositionIcon =
   /** Icon key used to render the position category in the UI. */
   "code" | "design" | "education" | "business" | "idea";
-
-import type { Localized } from "@/i18n/localized";
 
 export type ExperiencePosition = {
   id: string;
@@ -30,8 +30,11 @@ export type ExperiencePosition = {
 export type Experience = {
   id: string;
   companyName: string;
-  /** URL to the company logo (absolute URL or path under /public). */
+  /** URL to the company logo (absolute URL or path under /public). Shown in light mode. */
   companyLogo?: string;
+  /** Optional dark-mode variant of the logo. When set, `companyLogo` is used for
+   * light mode and this for dark mode (instead of CSS inversion). */
+  companyLogoDark?: string;
   /** Roles held at this company; keep newest first for display. */
   positions: ExperiencePosition[];
   /** Marks the company as the current employer for highlighting. */

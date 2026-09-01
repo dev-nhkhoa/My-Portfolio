@@ -53,9 +53,11 @@
     "projects": "Projects",
     "awards": "Awards",
     "certifications": "Certifications",
-    "faq": "FAQ",
     "blog": "Blog",
     "brand": "Brand"
+  },
+  "overview": {
+    "jobConnector": "at"
   },
   "a11y": {
     "overview": "Overview",

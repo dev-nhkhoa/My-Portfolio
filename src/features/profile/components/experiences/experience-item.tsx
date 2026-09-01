@@ -17,16 +17,41 @@ export async function ExperienceItem({
       <div className="flex items-center gap-3">
         <div className="flex size-7 shrink-0 items-center justify-center select-none">
           {experience.companyLogo ? (
-            <Image
-              src={experience.companyLogo}
-              alt={experience.companyName}
-              width={28}
-              height={28}
-              quality={100}
-              className={`rounded-full ${experience.theme && "not-dark:invert"}`}
-              unoptimized
-              aria-hidden
-            />
+            experience.companyLogoDark ? (
+              <>
+                <Image
+                  src={experience.companyLogo}
+                  alt={experience.companyName}
+                  width={28}
+                  height={28}
+                  quality={100}
+                  className="rounded-full dark:hidden"
+                  unoptimized
+                  aria-hidden
+                />
+                <Image
+                  src={experience.companyLogoDark}
+                  alt={experience.companyName}
+                  width={28}
+                  height={28}
+                  quality={100}
+                  className="hidden rounded-full dark:block"
+                  unoptimized
+                  aria-hidden
+                />
+              </>
+            ) : (
+              <Image
+                src={experience.companyLogo}
+                alt={experience.companyName}
+                width={28}
+                height={28}
+                quality={100}
+                className={`rounded-full ${experience.theme && "not-dark:invert"}`}
+                unoptimized
+                aria-hidden
+              />
+            )
           ) : (
             <span className="flex size-2 rounded-full bg-zinc-300 dark:bg-zinc-600" />
           )}

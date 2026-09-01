@@ -3,11 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import type {
-  FAQPage as FAQSchema,
-  ProfilePage as PageSchema,
-  WithContext,
-} from "schema-dts";
+import type { ProfilePage as PageSchema, WithContext } from "schema-dts";
 
 import { SITE_INFO } from "@/config/site";
 import { About } from "@/features/profile/components/about";
@@ -16,7 +12,6 @@ import { Blog } from "@/features/profile/components/blog";
 import { Brand } from "@/features/profile/components/brand";
 import { Certifications } from "@/features/profile/components/certifications";
 import { Experiences } from "@/features/profile/components/experiences";
-import { FAQ } from "@/features/profile/components/faq";
 import { GitHubContributions } from "@/features/profile/components/github-contributions";
 import { Overview } from "@/features/profile/components/overview";
 import { ProfileCover } from "@/features/profile/components/profile-cover";
@@ -25,7 +20,6 @@ import { Projects } from "@/features/profile/components/projects";
 import { SocialLinks } from "@/features/profile/components/social-links";
 import { TeckStack } from "@/features/profile/components/teck-stack";
 import { TestimonialsMarquee } from "@/features/profile/components/testimonials-marquee";
-import { FAQ as FAQ_ITEMS } from "@/features/profile/data/faq";
 import { SOCIAL_LINKS } from "@/features/profile/data/social-links";
 import { USER } from "@/features/profile/data/user";
 import { resolveLocalized } from "@/i18n/localized";
@@ -73,13 +67,6 @@ export default async function Page({
         }}
       />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(getFaqJsonLd(locale)).replace(/</g, "\\u003c"),
-        }}
-      />
-
       <div className="mx-auto md:max-w-3xl">
         <ProfileCover />
         <ProfileHeader />
@@ -116,9 +103,6 @@ export default async function Page({
         <Separator />
 
         <Certifications />
-        <Separator />
-
-        <FAQ />
         <Separator />
 
         <Brand />
@@ -185,25 +169,6 @@ function getPageJsonLd(locale: Locale): WithContext<PageSchema> {
       ],
       knowsLanguage: ["Vietnamese", "English"],
     },
-  };
-}
-
-/**
- * Mirrors the visible FAQ section. Both must stay in sync — FAQ schema whose
- * answers are absent from the page violates Google's structured-data policy.
- */
-function getFaqJsonLd(locale: Locale): WithContext<FAQSchema> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQ_ITEMS.map((item) => ({
-      "@type": "Question",
-      name: resolveLocalized(item.question, locale),
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: resolveLocalized(item.answer, locale),
-      },
-    })),
   };
 }
 

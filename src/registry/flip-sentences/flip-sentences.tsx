@@ -1,9 +1,47 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
+
+/**
+ * Render a sentence, turning inline `[label](href)` markdown links into
+ * anchors. Plain sentences render unchanged.
+ */
+function renderSentence(sentence: string) {
+  const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const nodes: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = linkPattern.exec(sentence)) !== null) {
+    if (match.index > lastIndex) {
+      nodes.push(sentence.slice(lastIndex, match.index));
+    }
+
+    const [, label, href] = match;
+    nodes.push(
+      <a
+        key={match.index}
+        className="font-medium text-foreground underline-offset-4 hover:underline"
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {label}
+      </a>
+    );
+
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < sentence.length) {
+    nodes.push(sentence.slice(lastIndex));
+  }
+
+  return nodes.map((node, i) => <Fragment key={i}>{node}</Fragment>);
+}
 
 export function FlipSentences({
   className,
@@ -76,7 +114,7 @@ export function FlipSentences({
           ease: "linear",
         }}
       >
-        {sentences[currentSentence]}
+        {renderSentence(sentences[currentSentence])}
       </motion.p>
     </AnimatePresence>
   );

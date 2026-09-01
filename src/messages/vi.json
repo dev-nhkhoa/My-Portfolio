@@ -53,9 +53,11 @@
     "projects": "Dự án",
     "awards": "Giải thưởng",
     "certifications": "Chứng chỉ",
-    "faq": "Câu hỏi thường gặp",
     "blog": "Blog",
     "brand": "Thương hiệu"
+  },
+  "overview": {
+    "jobConnector": "tại"
   },
   "a11y": {
     "overview": "Tổng quan",

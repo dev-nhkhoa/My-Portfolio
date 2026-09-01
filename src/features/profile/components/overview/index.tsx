@@ -19,7 +19,9 @@ import { PhoneItem } from "./phone-item";
 
 export async function Overview() {
   const t = await getTranslations("a11y");
+  const tOverview = await getTranslations("overview");
   const locale = (await getLocale()) as Locale;
+  const jobConnector = tOverview("jobConnector");
 
   return (
     <Panel>
@@ -30,6 +32,7 @@ export async function Overview() {
           title={resolveLocalized(USER.jobs[0].title, locale)}
           company={USER.jobs[0].company}
           website={USER.jobs[0].website}
+          connector={jobConnector}
         />
 
         <div className="grid gap-x-12 gap-y-2.5 sm:grid-cols-2">

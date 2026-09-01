@@ -3,7 +3,7 @@ import type { Localized } from "@/i18n/localized";
 export type Project = {
   /** Stable unique identifier (used as list key/anchor). */
   id: string;
-  title: string;
+  title: Localized<string>;
   /**
    * Project period for display and sorting.
    * Use "MM.YYYY" format. Omit `end` for ongoing projects.
@@ -20,8 +20,11 @@ export type Project = {
   skills: string[];
   /** Optional rich description; Markdown and line breaks supported. */
   description?: Localized<string>;
-  /** Logo image URL (absolute or path under /public). */
+  /** Logo image URL (absolute or path under /public). Shown in light mode. */
   logo?: string;
+  /** Optional dark-mode variant of the logo. When set, `logo` is used for light
+   * mode and this for dark mode. */
+  logoDark?: string;
   /** Whether the project card is expanded by default in the UI. */
   isExpanded?: boolean;
 };

@@ -7,7 +7,7 @@ ${PROJECTS.map((item) => {
   const description = item.description
     ? `\n\n${item.description.en.trim()}`
     : "";
-  return `## ${item.title}\n\nProject URL: ${item.link}${skills}${description}`;
+  return `## ${item.title.en}\n\nProject URL: ${item.link}${skills}${description}`;
 }).join("\n\n")}
 `;
 

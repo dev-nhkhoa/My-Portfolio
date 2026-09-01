@@ -30,15 +30,17 @@ type JobItemProps = {
   title: string;
   company: string;
   website: string;
+  /** Localized word linking role and company, e.g. "at" / "tại". Omit to skip. */
+  connector?: string;
 };
 
-export function JobItem({ title, company, website }: JobItemProps) {
+export function JobItem({ title, company, website, connector }: JobItemProps) {
   return (
     <IntroItem>
       <IntroItemIcon>{getJobIcon(title)}</IntroItemIcon>
 
       <IntroItemContent>
-        {title} @
+        {title} {connector ? `${connector} ` : ""}@
         <IntroItemLink
           className="ml-0.5 font-medium"
           href={addQueryParams(website, UTM_PARAMS)}

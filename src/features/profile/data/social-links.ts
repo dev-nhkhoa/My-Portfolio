@@ -2,27 +2,19 @@ import type { SocialLink } from "../types/social-links";
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    icon: "/images/link-icons/linkedin.svg",
+    icon: "/images/link-icons/linkedin.png",
+    invertOnDark: true,
     title: "LinkedIn",
     description: "@nhkhoa",
     href: "https://linkedin.com/in/nhkhoa",
+    padding: true,
   },
   {
     icon: "/images/link-icons/github.svg",
+    iconDark: "/images/link-icons/github-light.svg",
     title: "GitHub",
     description: "@dev-nhkhoa",
     href: "https://github.com/dev-nhkhoa",
-  },
-  {
-    icon: "/images/link-icons/facebook.svg",
-    title: "Facebook",
-    description: "@nhkhoa.a",
-    href: "https://www.facebook.com/nhkhoa.a/",
-  },
-  {
-    icon: "/images/link-icons/instagram.svg",
-    title: "Instagram",
-    description: "@nhkhoa.a",
-    href: "https://www.instagram.com/nhkhoa.a/",
+    padding: true,
   },
 ];
