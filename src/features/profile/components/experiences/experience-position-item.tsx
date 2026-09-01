@@ -1,5 +1,5 @@
 import { InfinityIcon } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import React from "react";
 
 import { Markdown } from "@/components/markdown";
@@ -12,6 +12,8 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Tag } from "@/components/ui/tag";
 import { Prose } from "@/components/ui/typography";
+import { resolveLocalized } from "@/i18n/localized";
+import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 import type { ExperiencePosition } from "../../types/experiences";
@@ -25,6 +27,10 @@ export async function ExperiencePositionItem({
   const { start, end } = position.employmentPeriod;
   const isOngoing = !end;
   const t = await getTranslations("a11y");
+  const locale = (await getLocale()) as Locale;
+  const description = position.description
+    ? resolveLocalized(position.description, locale)
+    : undefined;
 
   return (
     <CollapsibleWithContext defaultOpen={position.isExpanded} asChild>
@@ -48,7 +54,7 @@ export async function ExperiencePositionItem({
             </div>
 
             <h4 className="flex-1 font-medium text-balance">
-              {position.title}
+              {resolveLocalized(position.title, locale)}
             </h4>
 
             <div
@@ -64,7 +70,7 @@ export async function ExperiencePositionItem({
               <>
                 <dl>
                   <dt className="sr-only">{t("employmentType")}</dt>
-                  <dd>{position.employmentType}</dd>
+                  <dd>{resolveLocalized(position.employmentType, locale)}</dd>
                 </dl>
 
                 <Separator
@@ -96,9 +102,9 @@ export async function ExperiencePositionItem({
         </CollapsibleTrigger>
 
         <CollapsibleContent className="overflow-hidden duration-300 data-[state=closed]:animate-collapsible-fade-up data-[state=open]:animate-collapsible-fade-down">
-          {position.description && (
+          {description && (
             <Prose className="pt-2 pl-9">
-              <Markdown>{position.description}</Markdown>
+              <Markdown>{description}</Markdown>
             </Prose>
           )}
 

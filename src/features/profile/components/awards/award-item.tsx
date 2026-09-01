@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { FileCheckIcon } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import { Icons } from "@/components/icons";
 import { Markdown } from "@/components/markdown";
@@ -13,6 +13,8 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SimpleTooltip } from "@/components/ui/tooltip";
 import { Prose } from "@/components/ui/typography";
+import { resolveLocalized } from "@/i18n/localized";
+import type { Locale } from "@/i18n/routing";
 
 import type { Award } from "../../types/awards";
 
@@ -25,6 +27,10 @@ export async function AwardItem({
 }) {
   const canExpand = !!award.description;
   const t = await getTranslations("a11y");
+  const locale = (await getLocale()) as Locale;
+  const description = award.description
+    ? resolveLocalized(award.description, locale)
+    : undefined;
 
   return (
     <CollapsibleWithContext disabled={!canExpand} asChild>
@@ -41,13 +47,13 @@ export async function AwardItem({
             <CollapsibleTrigger className="flex w-full items-center gap-4 p-4 pr-2 text-left select-none">
               <div className="flex-1">
                 <h3 className="mb-1 leading-snug font-medium text-balance">
-                  {award.title}
+                  {resolveLocalized(award.title, locale)}
                 </h3>
 
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
                   <dl>
                     <dt className="sr-only">{t("prize")}</dt>
-                    <dd>{award.prize}</dd>
+                    <dd>{resolveLocalized(award.prize, locale)}</dd>
                   </dl>
 
                   <Separator
@@ -71,7 +77,7 @@ export async function AwardItem({
 
                   <dl>
                     <dt className="sr-only">{t("receivedInGrade")}</dt>
-                    <dd>{award.grade}</dd>
+                    <dd>{resolveLocalized(award.grade, locale)}</dd>
                   </dl>
                 </div>
               </div>
@@ -111,7 +117,7 @@ export async function AwardItem({
           <CollapsibleContent className="group overflow-hidden duration-300 data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
             <div className="border-t border-edge shadow-inner">
               <Prose className="p-4 duration-300 group-data-[state=closed]:animate-fade-out group-data-[state=open]:animate-fade-in">
-                <Markdown>{award.description}</Markdown>
+                <Markdown>{description}</Markdown>
               </Prose>
             </div>
           </CollapsibleContent>

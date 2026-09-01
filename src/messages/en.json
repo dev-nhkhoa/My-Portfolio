@@ -78,6 +78,9 @@
     "restartAnimation": "Restart animation",
     "home": "Home",
     "toggleMenu": "Toggle Menu",
+    "fromVietnam": "I'm from Vietnam",
+    "verified": "Verified",
+    "avatarAlt": "{name}'s avatar",
     "rss": "RSS",
     "dmca": "DMCA.com Protection Status"
   },

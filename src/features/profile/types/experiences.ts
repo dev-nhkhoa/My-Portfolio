@@ -2,9 +2,11 @@ export type ExperiencePositionIcon =
   /** Icon key used to render the position category in the UI. */
   "code" | "design" | "education" | "business" | "idea";
 
+import type { Localized } from "@/i18n/localized";
+
 export type ExperiencePosition = {
   id: string;
-  title: string;
+  title: Localized<string>;
   /**
    * Employment period of the position.
    * Use "MM.YYYY" or "YYYY" format. Omit `end` for current roles.
@@ -16,8 +18,8 @@ export type ExperiencePosition = {
     end?: string;
   };
   /** Full-time | Part-time | Contract | Internship, etc. */
-  employmentType?: string;
-  description?: string;
+  employmentType?: Localized<string>;
+  description?: Localized<string>;
   /** UI icon to represent the role type. */
   icon?: ExperiencePositionIcon;
   skills?: string[];

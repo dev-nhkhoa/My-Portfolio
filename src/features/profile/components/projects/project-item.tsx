@@ -1,6 +1,6 @@
 import { InfinityIcon, LinkIcon } from "lucide-react";
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import React from "react";
 
 import { Icons } from "@/components/icons";
@@ -15,6 +15,8 @@ import { Tag } from "@/components/ui/tag";
 import { SimpleTooltip } from "@/components/ui/tooltip";
 import { Prose } from "@/components/ui/typography";
 import { UTM_PARAMS } from "@/config/site";
+import { resolveLocalized } from "@/i18n/localized";
+import type { Locale } from "@/i18n/routing";
 import { addQueryParams } from "@/utils/url";
 
 import type { Project } from "../../types/projects";
@@ -29,6 +31,10 @@ export async function ProjectItem({
   const { start, end } = project.period;
   const isOngoing = !end;
   const t = await getTranslations("a11y");
+  const locale = (await getLocale()) as Locale;
+  const description = project.description
+    ? resolveLocalized(project.description, locale)
+    : undefined;
 
   return (
     <CollapsibleWithContext defaultOpen={project.isExpanded} asChild>
@@ -106,9 +112,9 @@ export async function ProjectItem({
         <CollapsibleContent className="group overflow-hidden duration-300 data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
           <div className="border-t border-edge shadow-inner">
             <div className="space-y-4 p-4 duration-300 group-data-[state=closed]:animate-fade-out group-data-[state=open]:animate-fade-in">
-              {project.description && (
+              {description && (
                 <Prose>
-                  <Markdown>{project.description}</Markdown>
+                  <Markdown>{description}</Markdown>
                 </Prose>
               )}
 

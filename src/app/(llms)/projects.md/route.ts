@@ -4,7 +4,9 @@ const content = `# Projects
 
 ${PROJECTS.map((item) => {
   const skills = `\n\nSkills: ${item.skills.join(", ")}`;
-  const description = item.description ? `\n\n${item.description.trim()}` : "";
+  const description = item.description
+    ? `\n\n${item.description.en.trim()}`
+    : "";
   return `## ${item.title}\n\nProject URL: ${item.link}${skills}${description}`;
 }).join("\n\n")}
 `;

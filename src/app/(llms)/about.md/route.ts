@@ -4,7 +4,7 @@ import { USER } from "@/features/profile/data/user";
 
 const content = `# About
 
-${USER.about.trim()}
+${USER.about.en.trim()}
 
 ## Personal Information
 

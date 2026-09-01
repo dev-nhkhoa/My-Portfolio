@@ -1,3 +1,5 @@
+import type { Localized } from "@/i18n/localized";
+
 export type Project = {
   /** Stable unique identifier (used as list key/anchor). */
   id: string;
@@ -17,7 +19,7 @@ export type Project = {
   /** Tags/technologies for chips or filtering. */
   skills: string[];
   /** Optional rich description; Markdown and line breaks supported. */
-  description?: string;
+  description?: Localized<string>;
   /** Logo image URL (absolute or path under /public). */
   logo?: string;
   /** Whether the project card is expanded by default in the UI. */

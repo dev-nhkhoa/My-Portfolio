@@ -24,7 +24,7 @@ export async function GET() {
 
   if (USER.jobs.length > 0) {
     const company = USER.jobs[0];
-    card.addCompany(company.company).addJobtitle(company.title);
+    card.addCompany(company.company).addJobtitle(company.title.en);
   }
 
   return new NextResponse(card.toString(), {

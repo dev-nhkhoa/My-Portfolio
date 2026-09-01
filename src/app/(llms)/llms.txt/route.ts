@@ -9,7 +9,7 @@ const primaryCompany = USER.jobs[0]?.company ?? "";
 
 const content = `# nhkhoa.site
 
-> The portfolio and blog of ${USER.displayName} (Vietnamese: Trương Nguyễn Anh Khoa), ${USER.jobTitle}${primaryCompany ? ` at ${primaryCompany}` : ""}, based in ${USER.address}. Graduated from Van Lang University. Writes about AI workflow automation, Agentic RAG, and LLM integration.
+> The portfolio and blog of ${USER.displayName} (Vietnamese: Trương Nguyễn Anh Khoa), ${USER.jobTitle.en}${primaryCompany ? ` at ${primaryCompany}` : ""}, based in ${USER.address}. Graduated from Van Lang University. Writes about AI workflow automation, Agentic RAG, and LLM integration.
 
 - [About](${SITE_INFO.url}/about.md): A quick intro to me, my tech stack, and how to connect.
 - [Experience](${SITE_INFO.url}/experience.md): Highlights from my career and key roles I've taken on.

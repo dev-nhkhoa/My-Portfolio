@@ -18,7 +18,7 @@ const primaryCompany = USER.jobs[0]?.company ?? "";
 
 const aboutText = `## About
 
-${USER.about.trim()}
+${USER.about.en.trim()}
 
 ### Personal Information
 
@@ -43,9 +43,9 @@ ${EXPERIENCES.map((item) =>
     .map((position) => {
       const skills = position.skills?.map((skill) => skill).join(", ") || "N/A";
       const description = position.description
-        ? `\n\n${position.description.trim()}`
+        ? `\n\n${position.description.en.trim()}`
         : "";
-      return `### ${position.title} | ${item.companyName}\n\nDuration: ${position.employmentPeriod.start} - ${position.employmentPeriod.end || "Present"}\n\nSkills: ${skills}${description}`;
+      return `### ${position.title.en} | ${item.companyName}\n\nDuration: ${position.employmentPeriod.start} - ${position.employmentPeriod.end || "Present"}\n\nSkills: ${skills}${description}`;
     })
     .join("\n\n")
 ).join("\n\n")}
@@ -55,14 +55,16 @@ const projectsText = `## Projects
 
 ${PROJECTS.map((item) => {
   const skills = `\n\nSkills: ${item.skills.join(", ")}`;
-  const description = item.description ? `\n\n${item.description.trim()}` : "";
+  const description = item.description
+    ? `\n\n${item.description.en.trim()}`
+    : "";
   return `### ${item.title}\n\nProject URL: ${item.link}${skills}${description}`;
 }).join("\n\n")}
 `;
 
 const awardsText = `## Awards
 
-${AWARDS.map((item) => `### ${item.prize} | ${item.title}\n\n${item.description}`).join("\n\n")}
+${AWARDS.map((item) => `### ${item.prize.en} | ${item.title.en}\n\n${item.description?.en ?? ""}`).join("\n\n")}
 `;
 
 const certificationsText = `## Certifications
@@ -80,11 +82,11 @@ async function getBlogContent() {
 }
 
 async function getContent() {
-  return `<SYSTEM>This document contains comprehensive information about ${USER.displayName}'s professional profile, portfolio, and blog content. It includes personal details, work experience, projects, achievements, certifications, and all published blog posts. This data is formatted for consumption by Large Language Models (LLMs) to provide accurate and up-to-date information about ${USER.displayName}'s background, skills, and expertise as ${USER.jobTitle}${primaryCompany ? ` at ${primaryCompany}` : ""}.</SYSTEM>
+  return `<SYSTEM>This document contains comprehensive information about ${USER.displayName}'s professional profile, portfolio, and blog content. It includes personal details, work experience, projects, achievements, certifications, and all published blog posts. This data is formatted for consumption by Large Language Models (LLMs) to provide accurate and up-to-date information about ${USER.displayName}'s background, skills, and expertise as ${USER.jobTitle.en}${primaryCompany ? ` at ${primaryCompany}` : ""}.</SYSTEM>
 
 # nhkhoa.site
 
-> The portfolio and blog of ${USER.displayName} (Vietnamese: Trương Nguyễn Anh Khoa), ${USER.jobTitle}${primaryCompany ? ` at ${primaryCompany}` : ""}, based in ${USER.address}. Graduated from Van Lang University. Writes about AI workflow automation, Agentic RAG, and LLM integration.
+> The portfolio and blog of ${USER.displayName} (Vietnamese: Trương Nguyễn Anh Khoa), ${USER.jobTitle.en}${primaryCompany ? ` at ${primaryCompany}` : ""}, based in ${USER.address}. Graduated from Van Lang University. Writes about AI workflow automation, Agentic RAG, and LLM integration.
 
 ${aboutText}
 ${experienceText}

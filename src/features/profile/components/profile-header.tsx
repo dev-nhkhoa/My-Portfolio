@@ -1,12 +1,19 @@
+import { getLocale, getTranslations } from "next-intl/server";
+
 import { SimpleTooltip } from "@/components/ui/tooltip";
 import { USER } from "@/features/profile/data/user";
+import { resolveLocalized } from "@/i18n/localized";
+import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { FlipSentences } from "@/registry/flip-sentences";
 
 import { PronounceMyName } from "./pronounce-my-name";
 import { VerifiedIcon } from "./verified-icon";
 
-export function ProfileHeader() {
+export async function ProfileHeader() {
+  const locale = (await getLocale()) as Locale;
+  const t = await getTranslations("a11y");
+
   return (
     <div className="screen-line-after flex border-x border-edge">
       <div className="shrink-0 border-r border-edge">
@@ -14,13 +21,13 @@ export function ProfileHeader() {
           {}
           <img
             className="size-32 rounded-full ring-1 ring-border ring-offset-2 ring-offset-background select-none sm:size-40"
-            alt={`${USER.displayName}'s avatar`}
+            alt={t("avatarAlt", { name: USER.displayName })}
             src={USER.avatar}
             fetchPriority="high"
           />
         </div>
 
-        <SimpleTooltip content="I'm from Vietnam">
+        <SimpleTooltip content={t("fromVietnam")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="absolute top-0 -left-px h-8 rounded-lg sm:h-9"
@@ -63,7 +70,7 @@ export function ProfileHeader() {
           <h1 className="flex items-center pl-4 text-3xl font-semibold">
             {USER.displayName}
             &nbsp;
-            <SimpleTooltip content="Verified">
+            <SimpleTooltip content={t("verified")}>
               <VerifiedIcon className="size-[0.6em] translate-y-px text-info select-none" />
             </SimpleTooltip>
             {USER.namePronunciationUrl && (
@@ -78,7 +85,9 @@ export function ProfileHeader() {
           </h1>
 
           <div className="h-12 border-t border-edge py-1 pl-4 sm:h-auto">
-            <FlipSentences sentences={USER.flipSentences} />
+            <FlipSentences
+              sentences={resolveLocalized(USER.flipSentences, locale)}
+            />
           </div>
         </div>
       </div>

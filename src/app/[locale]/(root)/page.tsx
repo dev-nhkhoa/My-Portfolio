@@ -47,7 +47,10 @@ export default async function Page({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(getPageJsonLd()).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(getPageJsonLd(locale)).replace(
+            /</g,
+            "\\u003c"
+          ),
         }}
       />
 
@@ -106,7 +109,7 @@ export default async function Page({
   );
 }
 
-function getPageJsonLd(): WithContext<PageSchema> {
+function getPageJsonLd(locale: Locale): WithContext<PageSchema> {
   const [currentJob] = USER.jobs;
 
   return {
@@ -124,8 +127,8 @@ function getPageJsonLd(): WithContext<PageSchema> {
       identifier: USER.username,
       url: SITE_INFO.url,
       image: `${SITE_INFO.url}${USER.avatar}`,
-      description: USER.bio,
-      jobTitle: USER.jobTitle,
+      description: resolveLocalized(USER.bio, locale),
+      jobTitle: resolveLocalized(USER.jobTitle, locale),
       // sameAs is the identity claim that lets search and AI engines resolve
       // every external profile to this one person.
       sameAs: SOCIAL_LINKS.map((link) => link.href),

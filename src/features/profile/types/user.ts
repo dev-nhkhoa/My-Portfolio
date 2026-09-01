@@ -1,3 +1,5 @@
+import type { Localized } from "@/i18n/localized";
+
 export type User = {
   firstName: string;
   lastName: string;
@@ -9,9 +11,9 @@ export type User = {
   gender: string;
   /** e.g. "he/him", "she/her", "they/them" */
   pronouns: string;
-  bio: string;
+  bio: Localized<string>;
   /** Short phrases rotated in UI (e.g., homepage flip effect) */
-  flipSentences: string[];
+  flipSentences: Localized<string[]>;
   /** General location for display */
   address: string;
   /** E.164 format, base64 encoded (https://t.io.vn/base64-string-converter) */
@@ -21,15 +23,15 @@ export type User = {
   /** Personal/homepage URL */
   website: string;
   /** Primary/current role shown on profile */
-  jobTitle: string;
+  jobTitle: Localized<string>;
   /** Work history entries */
   jobs: {
-    title: string;
+    title: Localized<string>;
     company: string;
     website: string;
   }[];
   /** Rich about section; supports Markdown */
-  about: string;
+  about: Localized<string>;
   /** Public URL to avatar image */
   avatar: string;
   /** Open Graph image URL for social sharing */

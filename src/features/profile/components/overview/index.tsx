@@ -1,7 +1,9 @@
 import { MapPinIcon, MarsIcon, VenusIcon } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import { USER } from "@/features/profile/data/user";
+import { resolveLocalized } from "@/i18n/localized";
+import type { Locale } from "@/i18n/routing";
 
 import { Panel, PanelContent } from "../panel";
 import { CurrentLocalTimeItem } from "./current-local-time-item";
@@ -17,6 +19,7 @@ import { PhoneItem } from "./phone-item";
 
 export async function Overview() {
   const t = await getTranslations("a11y");
+  const locale = (await getLocale()) as Locale;
 
   return (
     <Panel>
@@ -24,14 +27,14 @@ export async function Overview() {
 
       <PanelContent className="space-y-2.5">
         <JobItem
-          title={USER.jobs[0].title}
+          title={resolveLocalized(USER.jobs[0].title, locale)}
           company={USER.jobs[0].company}
           website={USER.jobs[0].website}
         />
 
         <div className="grid gap-x-12 gap-y-2.5 sm:grid-cols-2">
           <JobItem
-            title={USER.jobs[1].title}
+            title={resolveLocalized(USER.jobs[1].title, locale)}
             company={USER.jobs[1].company}
             website={USER.jobs[1].website}
           />

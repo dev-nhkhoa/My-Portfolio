@@ -6,9 +6,9 @@ ${EXPERIENCES.map((item) =>
   item.positions
     .map((position) => {
       const skills = position.skills?.map((skill) => skill).join(", ") || "N/A";
-      const description = position.description?.trim();
+      const description = position.description?.en.trim();
       return [
-        `## ${position.title} | ${item.companyName}`,
+        `## ${position.title.en} | ${item.companyName}`,
         `Duration: ${position.employmentPeriod.start} - ${position.employmentPeriod.end || "Present"}`,
         `Skills: ${skills}`,
         ...(description ? [description] : []),
