@@ -8,6 +8,7 @@ import { getAllPosts } from "@/features/blog/data/posts";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
+import { LanguageSwitcher } from "./language-switcher";
 import { SiteHeaderMark } from "./site-header-mark";
 import { SiteHeaderWrapper } from "./site-header-wrapper";
 import { ToggleTheme } from "./toggle-theme";
@@ -67,6 +68,7 @@ export async function SiteHeader() {
 
           <span className="mx-2 flex h-4 w-px bg-border" />
 
+          <LanguageSwitcher />
           <ToggleTheme />
           <MobileNav className="sm:hidden" items={navItems} />
         </div>
