@@ -1,11 +1,14 @@
 import { ArrowRightIcon } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
 import { KhoaMark } from "@/components/khoa-mark";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-export function NotFound({ className }: { className?: string }) {
+export async function NotFound({ className }: { className?: string }) {
+  const t = await getTranslations("notFound");
+
   return (
     <div
       className={cn(
@@ -19,7 +22,7 @@ export function NotFound({ className }: { className?: string }) {
 
       <Button variant="default" asChild>
         <Link href="/">
-          Go to Home
+          {t("backHome")}
           <ArrowRightIcon />
         </Link>
       </Button>
