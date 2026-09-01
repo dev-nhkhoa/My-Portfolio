@@ -62,11 +62,6 @@ const MENU_LINKS: CommandLinkItem[] = [
     href: "/blog",
     icon: RssIcon,
   },
-  {
-    title: "Invitation",
-    href: "/invitation",
-    icon: LetterTextIcon,
-  },
 ];
 
 const PORTFOLIO_LINKS: CommandLinkItem[] = [
