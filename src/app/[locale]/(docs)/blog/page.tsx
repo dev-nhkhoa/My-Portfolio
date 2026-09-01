@@ -62,8 +62,8 @@ export async function generateMetadata({
   };
 }
 
-function getBlogJsonLd(locale: string): WithContext<BlogSchema> {
-  const allPosts = getAllPosts();
+function getBlogJsonLd(locale: "en" | "vi"): WithContext<BlogSchema> {
+  const allPosts = getAllPosts(locale);
 
   return {
     "@context": "https://schema.org",
@@ -98,7 +98,7 @@ export default async function Page({
   }
   setRequestLocale(locale);
   const t = await getTranslations("blog");
-  const allPosts = getAllPosts();
+  const allPosts = getAllPosts(locale);
 
   return (
     <>

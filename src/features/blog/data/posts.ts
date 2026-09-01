@@ -51,6 +51,7 @@ function normalizeMetadata(metadata: PostMetadata, slug: string): PostMetadata {
   return {
     ...metadata,
     updatedAt,
+    locale: metadata.locale ?? "en",
   };
 }
 
@@ -69,9 +70,10 @@ function getMDXData(dir: string) {
   });
 }
 
-export function getAllPosts() {
+export function getAllPosts(locale?: "en" | "vi") {
   return getMDXData(path.join(process.cwd(), "src/features/blog/content"))
     .filter((post) => !post.metadata.draft)
+    .filter((post) => (locale ? post.metadata.locale === locale : true))
     .sort((a, b) => {
       if (a.metadata.pinned && !b.metadata.pinned) return -1;
       if (!a.metadata.pinned && b.metadata.pinned) return 1;
@@ -81,6 +83,17 @@ export function getAllPosts() {
         new Date(a.metadata.createdAt).getTime()
       );
     });
+}
+
+/** Find the counterpart of `post` in `targetLocale` via shared translationKey. */
+export function getTranslation(post: Post, targetLocale: "en" | "vi") {
+  if (!post.metadata.translationKey) return undefined;
+
+  return getMDXData(path.join(process.cwd(), "src/features/blog/content")).find(
+    (p) =>
+      p.metadata.translationKey === post.metadata.translationKey &&
+      p.metadata.locale === targetLocale
+  );
 }
 
 export function getPostBySlug(slug: string) {

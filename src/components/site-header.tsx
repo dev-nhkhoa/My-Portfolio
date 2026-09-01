@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import { DesktopNav } from "@/components/desktop-nav";
 import { NavItemGitHub } from "@/components/nav-item-github";
@@ -25,7 +25,8 @@ const MobileNav = dynamic(() =>
 );
 
 export async function SiteHeader() {
-  const posts = getAllPosts();
+  const locale = await getLocale();
+  const posts = getAllPosts(locale);
   const t = await getTranslations("nav");
   const tA11y = await getTranslations("a11y");
   const navItems = MAIN_NAV.map((item) => ({

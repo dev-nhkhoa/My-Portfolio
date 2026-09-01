@@ -11,6 +11,10 @@ export type PostMetadata = {
   createdAt: string;
   updatedAt: string;
   font?: string;
+  /** Locale this post is written in. Defaults to "en" when absent. */
+  locale: "en" | "vi";
+  /** Shared id linking a post to its translations across locales. */
+  translationKey?: string;
 };
 
 export type Post = {

@@ -4,7 +4,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { BlogPosting as PageSchema, WithContext } from "schema-dts";
 
 import { InlineTOC } from "@/components/inline-toc";
@@ -19,6 +19,7 @@ import {
   findNeighbour,
   getAllPosts,
   getPostBySlug,
+  getTranslation,
 } from "@/features/blog/data/posts";
 import type { Post } from "@/features/blog/types/post";
 import { USER } from "@/features/profile/data/user";
@@ -29,6 +30,7 @@ import { cn } from "@/lib/utils";
 export async function generateStaticParams() {
   const posts = getAllPosts();
   return posts.map((post) => ({
+    locale: post.metadata.locale,
     slug: post.slug,
   }));
 }
@@ -131,8 +133,12 @@ export default async function Page({
 
   const toc = getTableOfContents(post.content);
 
-  const allPosts = getAllPosts();
+  const allPosts = getAllPosts(post.metadata.locale);
   const { previous, next } = findNeighbour(allPosts, slug);
+  const t = await getTranslations("blog");
+
+  const otherLocale = post.metadata.locale === "en" ? "vi" : "en";
+  const translation = getTranslation(post, otherLocale);
 
   return (
     <>
@@ -153,7 +159,7 @@ export default async function Page({
         >
           <Link href="/blog">
             <ArrowLeftIcon />
-            Blog
+            {t("title")}
           </Link>
         </Button>
 
@@ -169,7 +175,7 @@ export default async function Page({
             <Button variant="secondary" size="icon-sm" asChild>
               <Link href={`/blog/${previous.slug}`}>
                 <ArrowLeftIcon />
-                <span className="sr-only">Previous</span>
+                <span className="sr-only">{t("previous")}</span>
               </Link>
             </Button>
           )}
@@ -177,7 +183,7 @@ export default async function Page({
           {next && (
             <Button variant="secondary" size="icon-sm" asChild>
               <Link href={`/blog/${next.slug}`}>
-                <span className="sr-only">Next</span>
+                <span className="sr-only">{t("next")}</span>
                 <ArrowRightIcon />
               </Link>
             </Button>
@@ -201,6 +207,20 @@ export default async function Page({
         </h1>
 
         <p className="lead mt-6 mb-6">{post.metadata.description}</p>
+
+        {translation && (
+          <p className="mt-6 mb-6 text-sm">
+            <Link
+              className="text-muted-foreground underline hover:text-foreground"
+              href={`/blog/${translation.slug}`}
+              locale={otherLocale}
+            >
+              {t("readTranslation", {
+                language: otherLocale === "vi" ? "Tiếng Việt" : "English",
+              })}
+            </Link>
+          </p>
+        )}
 
         <InlineTOC items={toc} />
 
