@@ -36,9 +36,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const slug = (await params).slug;
+  const { locale, slug } = await params;
   const post = getPostBySlug(slug);
 
   if (!post) {
@@ -47,7 +47,7 @@ export async function generateMetadata({
 
   const { title, description, image, createdAt, updatedAt, tags } =
     post.metadata;
-  const postUrl = getPostUrl(post);
+  const postUrl = `/${locale}${getPostUrl(post)}`;
   const ogImage = getAbsoluteUrl(
     image || `/og/simple?title=${encodeURIComponent(title)}`
   );

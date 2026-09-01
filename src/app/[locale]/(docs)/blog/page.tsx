@@ -12,48 +12,65 @@ import { USER } from "@/features/profile/data/user";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 
-const title = "Blog";
-const description =
-  "A collection of articles on development, design, and ideas.";
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({
+    locale: locale as (typeof routing.locales)[number],
+    namespace: "blog",
+  });
+  const title = t("title");
+  const description = t("description");
 
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: {
-    canonical: "/blog",
-  },
-  openGraph: {
+  const languages = Object.fromEntries(
+    routing.locales.map((l) => [l, `/${l}/blog`])
+  );
+
+  return {
     title,
     description,
-    url: "/blog",
-    type: "website",
-    images: [
-      {
-        url: SITE_INFO.ogImage,
-        width: 1200,
-        height: 630,
-        alt: SITE_INFO.name,
+    alternates: {
+      canonical: `/${locale}/blog`,
+      languages: {
+        ...languages,
+        "x-default": `/${routing.defaultLocale}/blog`,
       },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-    images: [SITE_INFO.ogImage],
-  },
-};
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/${locale}/blog`,
+      type: "website",
+      images: [
+        {
+          url: SITE_INFO.ogImage,
+          width: 1200,
+          height: 630,
+          alt: SITE_INFO.name,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [SITE_INFO.ogImage],
+    },
+  };
+}
 
-function getBlogJsonLd(): WithContext<BlogSchema> {
+function getBlogJsonLd(locale: string): WithContext<BlogSchema> {
   const allPosts = getAllPosts();
 
   return {
     "@context": "https://schema.org",
     "@type": "Blog",
-    name: `${title} – ${SITE_INFO.name}`,
-    description,
-    url: `${SITE_INFO.url}/blog`,
-    inLanguage: "en",
+    name: `Blog – ${SITE_INFO.name}`,
+    url: `${SITE_INFO.url}/${locale}/blog`,
+    inLanguage: locale,
     author: {
       "@type": "Person",
       name: USER.displayName,
@@ -88,7 +105,10 @@ export default async function Page({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(getBlogJsonLd()).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(getBlogJsonLd(locale)).replace(
+            /</g,
+            "\\u003c"
+          ),
         }}
       />
 

@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
@@ -30,6 +31,24 @@ import { USER } from "@/features/profile/data/user";
 import { resolveLocalized } from "@/i18n/localized";
 import { type Locale, routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const languages = Object.fromEntries(
+    routing.locales.map((l) => [l, `/${l}`])
+  );
+
+  return {
+    alternates: {
+      canonical: `/${locale}`,
+      languages: { ...languages, "x-default": `/${routing.defaultLocale}` },
+    },
+  };
+}
 
 export default async function Page({
   params,
