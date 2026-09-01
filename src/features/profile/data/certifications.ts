@@ -1,7 +1,5 @@
 import type { Certification } from "../types/certifications";
 
-
-
 export const CERTIFICATIONS: Certification[] = [
   // {
   //   title: "HydThon - AI Hackathon 2026 Participation",
@@ -27,8 +25,7 @@ export const CERTIFICATIONS: Certification[] = [
     issuerIconName: "anthropic",
     issueDate: "2026-04",
     credentialID: "ai-fluency-for-students",
-    credentialURL:
-      "https://verify.skilljar.com/c/o8ghyaaut32n",
+    credentialURL: "https://verify.skilljar.com/c/o8ghyaaut32n",
   },
   {
     title: "Google AI Professional Certificate",

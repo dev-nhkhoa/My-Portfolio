@@ -1,19 +1,22 @@
 import dayjs from "dayjs";
 import { PinIcon } from "lucide-react";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import React from "react";
 
 import type { Post } from "@/features/blog/types/post";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-export function PostItem({
+export async function PostItem({
   post,
   shouldPreloadImage,
 }: {
   post: Post;
   shouldPreloadImage?: boolean;
 }) {
+  const t = await getTranslations("a11y");
+
   return (
     <Link
       href={`/blog/${post.slug}`}
@@ -45,7 +48,7 @@ export function PostItem({
           {post.metadata.pinned && (
             <span className="absolute top-1.5 right-1.5 flex size-6 items-center justify-center rounded-md bg-info">
               <PinIcon className="size-4 rotate-45 text-white" />
-              <span className="sr-only">Pinned</span>
+              <span className="sr-only">{t("pinned")}</span>
             </span>
           )}
         </div>
@@ -56,13 +59,13 @@ export function PostItem({
           {post.metadata.title}
           {post.metadata.new && (
             <span className="ml-2 inline-block size-2 -translate-y-px rounded-full bg-info">
-              <span className="sr-only">New</span>
+              <span className="sr-only">{t("new")}</span>
             </span>
           )}
         </h3>
 
         <dl>
-          <dt className="sr-only">Published on</dt>
+          <dt className="sr-only">{t("publishedOn")}</dt>
           <dd className="text-sm text-muted-foreground">
             <time dateTime={dayjs(post.metadata.createdAt).toISOString()}>
               {dayjs(post.metadata.createdAt).format("DD.MM.YYYY")}

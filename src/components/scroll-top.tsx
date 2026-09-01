@@ -2,6 +2,7 @@
 
 import { ArrowUpIcon } from "lucide-react";
 import { useMotionValueEvent, useScroll } from "motion/react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ export function ScrollTop({
   ...props
 }: React.ComponentProps<"button">) {
   const { scrollY } = useScroll();
+  const t = useTranslations("a11y");
 
   const [visible, setVisible] = useState(false);
   const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down");
@@ -40,7 +42,7 @@ export function ScrollTop({
       {...props}
     >
       <ArrowUpIcon className="size-5" />
-      <span className="sr-only">Scroll to top</span>
+      <span className="sr-only">{t("scrollToTop")}</span>
     </Button>
   );
 }

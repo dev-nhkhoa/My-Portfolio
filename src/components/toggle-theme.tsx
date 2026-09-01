@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { useCallback } from "react";
 
@@ -13,6 +14,7 @@ import { Button } from "./ui/button";
 
 export function ToggleTheme() {
   const { resolvedTheme, setTheme } = useTheme();
+  const t = useTranslations("a11y");
 
   const { setMetaColor } = useMetaColor();
 
@@ -40,7 +42,7 @@ export function ToggleTheme() {
     >
       <MoonIcon className="relative hidden after:absolute after:-inset-2 [html.dark_&]:block" />
       <SunMediumIcon className="relative hidden after:absolute after:-inset-2 [html.light_&]:block" />
-      <span className="sr-only">Toggle Theme</span>
+      <span className="sr-only">{t("toggleTheme")}</span>
     </Button>
   );
 }
