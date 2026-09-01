@@ -1,9 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 import type { Post } from "@/features/blog/types/post";
+import { useRouter } from "@/i18n/navigation";
 
 export function PostKeyboardShortcuts({
   basePath,

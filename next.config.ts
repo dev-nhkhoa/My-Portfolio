@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 import path from "path";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -30,6 +33,32 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/en",
+        permanent: true,
+      },
+      {
+        source: "/blog",
+        destination: "/en/blog",
+        permanent: true,
+      },
+      {
+        // Exclude dotted paths (e.g. `/blog/foo.mdx`) so the `.mdx` rewrite
+        // above keeps working.
+        source: "/blog/:slug([^.]+)",
+        destination: "/en/blog/:slug",
+        permanent: true,
+      },
+      {
+        source: "/internal-project",
+        destination: "/en/internal-project",
+        permanent: true,
+      },
+    ];
+  },
   // async headers() {
   //   return [
   //     {
@@ -56,4 +85,4 @@ const nextConfig: NextConfig = {
   // },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

@@ -2,8 +2,9 @@ import dayjs from "dayjs";
 import { getTableOfContents } from "fumadocs-core/content/toc";
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { hasLocale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import type { BlogPosting as PageSchema, WithContext } from "schema-dts";
 
 import { InlineTOC } from "@/components/inline-toc";
@@ -21,6 +22,8 @@ import {
 } from "@/features/blog/data/posts";
 import type { Post } from "@/features/blog/types/post";
 import { USER } from "@/features/profile/data/user";
+import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 export async function generateStaticParams() {
@@ -111,10 +114,15 @@ export default async function Page({
   params,
 }: {
   params: Promise<{
+    locale: string;
     slug: string;
   }>;
 }) {
-  const slug = (await params).slug;
+  const { locale, slug } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+  setRequestLocale(locale);
   const post = getPostBySlug(slug);
 
   if (!post) {

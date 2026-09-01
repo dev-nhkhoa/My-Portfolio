@@ -15,7 +15,6 @@ import {
   TypeIcon,
 } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -32,6 +31,7 @@ import {
 import type { Post } from "@/features/blog/types/post";
 import { SOCIAL_LINKS } from "@/features/profile/data/social-links";
 import { useSound } from "@/hooks/use-sound";
+import { useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { copyText } from "@/utils/copy";
 

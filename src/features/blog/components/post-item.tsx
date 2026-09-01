@@ -1,10 +1,10 @@
 import dayjs from "dayjs";
 import { PinIcon } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 import type { Post } from "@/features/blog/types/post";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 export function PostItem({

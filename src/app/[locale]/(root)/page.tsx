@@ -1,4 +1,7 @@
 import dayjs from "dayjs";
+import { notFound } from "next/navigation";
+import { hasLocale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import type {
   FAQPage as FAQSchema,
   ProfilePage as PageSchema,
@@ -24,9 +27,20 @@ import { TestimonialsMarquee } from "@/features/profile/components/testimonials-
 import { FAQ as FAQ_ITEMS } from "@/features/profile/data/faq";
 import { SOCIAL_LINKS } from "@/features/profile/data/social-links";
 import { USER } from "@/features/profile/data/user";
+import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
-export default function Page() {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+  setRequestLocale(locale);
+
   return (
     <>
       <script

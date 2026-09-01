@@ -1,8 +1,12 @@
 import { ArrowLeft, Building2, FileText, Lock, Shield } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { notFound } from "next/navigation";
+import { hasLocale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 
 import { SITE_INFO } from "@/config/site";
+import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 
 const title = "Internal Client Project";
 const description =
@@ -36,7 +40,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function InternalProjectPage() {
+export default async function InternalProjectPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+  setRequestLocale(locale);
+
   return (
     <div className="mx-auto min-h-screen md:max-w-3xl">
       <div className="space-y-8 py-12">

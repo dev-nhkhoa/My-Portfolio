@@ -1,8 +1,9 @@
 "use client";
 
 import { useMotionValueEvent, useScroll } from "motion/react";
-import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+
+import { usePathname } from "@/i18n/navigation";
 
 import { KhoaMark } from "./khoa-mark";
 

@@ -2,11 +2,14 @@ import "@/styles/globals.css";
 
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 import type { WebSite, WithContext } from "schema-dts";
 
 import { Providers } from "@/components/providers";
 import { META_THEME_COLORS, SITE_INFO } from "@/config/site";
 import { USER } from "@/features/profile/data/user";
+import { routing } from "@/i18n/routing";
 import {
   fontInter,
   fontLora,
@@ -16,14 +19,14 @@ import {
 } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
-function getWebSiteJsonLd(): WithContext<WebSite> {
+function getWebSiteJsonLd(locale: string): WithContext<WebSite> {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: SITE_INFO.name,
     url: SITE_INFO.url,
     description: SITE_INFO.description,
-    inLanguage: "en",
+    inLanguage: locale,
     alternateName: [USER.username],
   };
 }
@@ -124,14 +127,19 @@ export const viewport: Viewport = {
   themeColor: META_THEME_COLORS.light,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const requested = await getLocale();
+  const locale = hasLocale(routing.locales, requested)
+    ? requested
+    : routing.defaultLocale;
+
   return (
     <html
-      lang="en"
+      lang={locale}
       className={cn(
         fontSans.variable,
         fontMono.variable,
@@ -154,13 +162,18 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getWebSiteJsonLd()).replace(/</g, "\\u003c"),
+            __html: JSON.stringify(getWebSiteJsonLd(locale)).replace(
+              /</g,
+              "\\u003c"
+            ),
           }}
         />
       </head>
 
       <body suppressHydrationWarning>
-        <Providers>{children}</Providers>
+        <NextIntlClientProvider>
+          <Providers>{children}</Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

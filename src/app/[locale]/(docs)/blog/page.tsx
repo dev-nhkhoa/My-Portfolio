@@ -1,12 +1,16 @@
 import dayjs from "dayjs";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { notFound } from "next/navigation";
+import { hasLocale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import type { Blog as BlogSchema, WithContext } from "schema-dts";
 
 import { SITE_INFO } from "@/config/site";
 import { PostItem } from "@/features/blog/components/post-item";
 import { getAllPosts } from "@/features/blog/data/posts";
 import { USER } from "@/features/profile/data/user";
+import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 
 const title = "Blog";
 const description =
@@ -66,7 +70,16 @@ function getBlogJsonLd(): WithContext<BlogSchema> {
   };
 }
 
-export default function Page() {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+  setRequestLocale(locale);
   const allPosts = getAllPosts();
 
   return (

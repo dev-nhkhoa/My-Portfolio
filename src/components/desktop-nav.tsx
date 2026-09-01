@@ -1,8 +1,7 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-
 import { Nav } from "@/components/nav";
+import { usePathname } from "@/i18n/navigation";
 import type { NavItem } from "@/types/nav";
 
 export function DesktopNav({ items }: { items: NavItem[] }) {
