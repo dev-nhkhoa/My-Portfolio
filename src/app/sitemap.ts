@@ -10,12 +10,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: dayjs(post.metadata.updatedAt).toISOString(),
   }));
 
-  const routes = ["", "/blog", "/invitation", "/internal-project"].map(
-    (route) => ({
-      url: `${SITE_INFO.url}${route}`,
-      lastModified: dayjs().toISOString(),
-    })
-  );
+  const routes = ["", "/blog", "/internal-project"].map((route) => ({
+    url: `${SITE_INFO.url}${route}`,
+    lastModified: dayjs().toISOString(),
+  }));
 
   return [...routes, ...posts];
 }
