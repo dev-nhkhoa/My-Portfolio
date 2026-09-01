@@ -1,4 +1,5 @@
 import { ArrowRightIcon } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -8,13 +9,15 @@ import { Link } from "@/i18n/navigation";
 
 import { Panel, PanelHeader, PanelTitle } from "./panel";
 
-export function Blog() {
+export async function Blog() {
   const allPosts = getAllPosts();
+  const t = await getTranslations("panels");
+  const tBlog = await getTranslations("blog");
 
   return (
     <Panel id="blog">
       <PanelHeader>
-        <PanelTitle>Blog</PanelTitle>
+        <PanelTitle>{t("blog")}</PanelTitle>
       </PanelHeader>
 
       <div className="relative py-4">
@@ -33,7 +36,7 @@ export function Blog() {
       <div className="screen-line-before flex justify-center py-2">
         <Button variant="default" asChild>
           <Link href="/blog">
-            All Posts
+            {tBlog("allPosts")}
             <ArrowRightIcon />
           </Link>
         </Button>

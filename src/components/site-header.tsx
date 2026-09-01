@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { getTranslations } from "next-intl/server";
 
 import { DesktopNav } from "@/components/desktop-nav";
 import { NavItemGitHub } from "@/components/nav-item-github";
@@ -23,8 +24,14 @@ const MobileNav = dynamic(() =>
   import("@/components/mobile-nav").then((mod) => mod.MobileNav)
 );
 
-export function SiteHeader() {
+export async function SiteHeader() {
   const posts = getAllPosts();
+  const t = await getTranslations("nav");
+  const tA11y = await getTranslations("a11y");
+  const navItems = MAIN_NAV.map((item) => ({
+    title: t(item.titleKey as Parameters<typeof t>[0]),
+    href: item.href,
+  }));
 
   return (
     <SiteHeaderWrapper
@@ -43,7 +50,7 @@ export function SiteHeader() {
           <Link
             className="has-data-[visible=false]:pointer-events-none [&_svg]:h-8"
             href="/"
-            aria-label="Home"
+            aria-label={tA11y("home")}
           >
             <SiteHeaderMark />
           </Link>
@@ -51,7 +58,7 @@ export function SiteHeader() {
 
         <div className="flex-1" />
 
-        <DesktopNav items={MAIN_NAV} />
+        <DesktopNav items={navItems} />
 
         <div className="flex items-center *:first:mr-2">
           <CommandMenu posts={posts} />
@@ -60,7 +67,7 @@ export function SiteHeader() {
           <span className="mx-2 flex h-4 w-px bg-border" />
 
           <ToggleTheme />
-          <MobileNav className="sm:hidden" items={MAIN_NAV} />
+          <MobileNav className="sm:hidden" items={navItems} />
         </div>
       </div>
     </SiteHeaderWrapper>

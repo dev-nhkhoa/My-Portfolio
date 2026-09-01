@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Blog as BlogSchema, WithContext } from "schema-dts";
 
 import { SITE_INFO } from "@/config/site";
@@ -80,6 +80,7 @@ export default async function Page({
     notFound();
   }
   setRequestLocale(locale);
+  const t = await getTranslations("blog");
   const allPosts = getAllPosts();
 
   return (
@@ -92,12 +93,12 @@ export default async function Page({
       />
 
       <div className="screen-line-after px-4">
-        <h1 className="text-3xl font-semibold">Blog</h1>
+        <h1 className="text-3xl font-semibold">{t("title")}</h1>
       </div>
 
       <div className="screen-line-after p-4">
         <p className="font-mono text-sm text-balance text-muted-foreground">
-          {metadata.description}
+          {t("description")}
         </p>
       </div>
 
@@ -123,7 +124,7 @@ export default async function Page({
           href="/#blog"
           className="text-sm text-muted-foreground underline hover:text-foreground"
         >
-          ← Back to Portfolio
+          {t("backToPortfolio")}
         </Link>
       </div>
     </>

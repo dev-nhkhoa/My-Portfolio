@@ -15,6 +15,7 @@ import {
   TypeIcon,
 } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -51,57 +52,60 @@ type CommandLinkItem = {
   openInNewTab?: boolean;
 };
 
-const MENU_LINKS: CommandLinkItem[] = [
+/** Static shape keyed by a message key; the title is resolved at render. */
+type CommandLinkDef = Omit<CommandLinkItem, "title"> & { titleKey: string };
+
+const MENU_LINKS: CommandLinkDef[] = [
   {
-    title: "Portfolio",
+    titleKey: "headings.portfolio",
     href: "/",
     iconImage: "/images/brand/ak-mark.png",
   },
   {
-    title: "Blog",
+    titleKey: "headings.blog",
     href: "/blog",
     icon: RssIcon,
   },
 ];
 
-const PORTFOLIO_LINKS: CommandLinkItem[] = [
+const PORTFOLIO_LINKS: CommandLinkDef[] = [
   {
-    title: "About",
+    titleKey: "items.about",
     href: "/#about",
     icon: LetterTextIcon,
   },
   {
-    title: "Tech Stack",
+    titleKey: "items.techStack",
     href: "/#stack",
     icon: Icons.ts,
   },
   {
-    title: "Experience",
+    titleKey: "items.experience",
     href: "/#experience",
     icon: BriefcaseBusinessIcon,
   },
   {
-    title: "Projects",
+    titleKey: "items.projects",
     href: "/#projects",
     icon: Icons.project,
   },
   {
-    title: "Honors & Awards",
+    titleKey: "items.awards",
     href: "/#awards",
     icon: Icons.award,
   },
   {
-    title: "Certifications",
+    titleKey: "items.certifications",
     href: "/#certs",
     icon: Icons.certificate,
   },
   {
-    title: "Testimonials",
+    titleKey: "items.testimonials",
     href: "/#testimonials",
     icon: MessageCircleMoreIcon,
   },
   {
-    title: "Download vCard",
+    titleKey: "items.downloadVCard",
     href: "/vcard",
     icon: CircleUserIcon,
   },
@@ -114,8 +118,16 @@ const SOCIAL_LINK_ITEMS: CommandLinkItem[] = SOCIAL_LINKS.map((item) => ({
   openInNewTab: true,
 }));
 
+function resolveLinks(
+  defs: CommandLinkDef[],
+  t: (key: string) => string
+): CommandLinkItem[] {
+  return defs.map(({ titleKey, ...rest }) => ({ ...rest, title: t(titleKey) }));
+}
+
 export function CommandMenu({ posts }: { posts: Post[] }) {
   const router = useRouter();
+  const t = useTranslations("commandMenu");
 
   const { setTheme, resolvedTheme } = useTheme();
 
@@ -199,6 +211,11 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
 
   const hasComponents = componentLinks.length > 0;
 
+  const tr = (key: string) => t(key as Parameters<typeof t>[0]);
+  const menuLinks = resolveLinks(MENU_LINKS, tr);
+  const portfolioLinks = resolveLinks(PORTFOLIO_LINKS, tr);
+  const commandMetaMap = buildCommandMetaMap(tr);
+
   return (
     <>
       <Button
@@ -221,7 +238,7 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
         </svg>
 
         <span className="font-sans text-sm/4 font-medium sm:hidden">
-          Search
+          {t("search")}
         </span>
 
         <CommandMenuKbd className="hidden tracking-wider sm:in-[.os-macos_&]:flex">
@@ -233,29 +250,29 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput placeholder={t("placeholder")} />
 
         <CommandList className="min-h-80 supports-timeline-scroll:scroll-fade-y">
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>{t("empty")}</CommandEmpty>
 
           <CommandLinkGroup
-            heading="Menu"
-            links={MENU_LINKS}
+            heading={t("headings.menu")}
+            links={menuLinks}
             onLinkSelect={handleOpenLink}
           />
 
           <CommandSeparator />
 
           <CommandLinkGroup
-            heading="Portfolio"
-            links={PORTFOLIO_LINKS}
+            heading={t("headings.portfolio")}
+            links={portfolioLinks}
             onLinkSelect={handleOpenLink}
           />
 
           <CommandSeparator />
 
           <CommandLinkGroup
-            heading="Blog"
+            heading={t("headings.blog")}
             links={blogLinks}
             fallbackIcon={TextIcon}
             onLinkSelect={handleOpenLink}
@@ -266,7 +283,7 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
               <CommandSeparator />
 
               <CommandLinkGroup
-                heading="Components"
+                heading={t("headings.components")}
                 links={componentLinks}
                 fallbackIcon={Icons.react}
                 onLinkSelect={handleOpenLink}
@@ -277,67 +294,75 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
           <CommandSeparator />
 
           <CommandLinkGroup
-            heading="Social Links"
+            heading={t("headings.socialLinks")}
             links={SOCIAL_LINK_ITEMS}
             onLinkSelect={handleOpenLink}
           />
 
           <CommandSeparator />
 
-          <CommandGroup heading="Brand Assets">
+          <CommandGroup heading={t("headings.brandAssets")}>
             <CommandItem
               onSelect={() => {
                 handleCopyText(
                   getMarkSVG(resolvedTheme === "light" ? "#000" : "#fff"),
-                  "Copied Mark as SVG"
+                  t("toast.copiedMark")
                 );
               }}
             >
               <KhoaMark className="size-6" />
-              Copy Mark as SVG
+              {t("items.copyMark")}
             </CommandItem>
 
             <CommandItem
               onSelect={() => {
                 handleCopyText(
                   getWordmarkSVG(resolvedTheme === "light" ? "#000" : "#fff"),
-                  "Copied Logotype as SVG"
+                  t("toast.copiedLogotype")
                 );
               }}
             >
               <TypeIcon />
-              Copy Logotype as SVG
+              {t("items.copyLogotype")}
             </CommandItem>
           </CommandGroup>
 
           <CommandSeparator />
 
-          <CommandGroup heading="Theme">
+          <CommandGroup heading={t("headings.theme")}>
             <CommandItem
               keywords={["theme"]}
               onSelect={createThemeHandler("light")}
             >
               <SunIcon />
-              Light
+              {t("items.light")}
             </CommandItem>
             <CommandItem
               keywords={["theme"]}
               onSelect={createThemeHandler("dark")}
             >
               <MoonStarIcon />
-              Dark
+              {t("items.dark")}
             </CommandItem>
             <CommandItem
               keywords={["theme"]}
               onSelect={createThemeHandler("system")}
             >
               <Icons.contrast />
-              Auto
+              {t("items.auto")}
             </CommandItem>
           </CommandGroup>
         </CommandList>
 
-        <CommandMenuFooter />
+        <CommandMenuFooter
+          metaMap={commandMetaMap}
+          enterActionLabels={{
+            command: t("actions.runCommand"),
+            page: t("actions.goToPage"),
+            link: t("actions.openLink"),
+          }}
+          exitLabel={t("actions.exit")}
+        />
       </CommandDialog>
     </>
   );
@@ -394,24 +419,17 @@ type CommandMetaMap = Map<
   }
 >;
 
-function buildCommandMetaMap() {
+function buildCommandMetaMap(t: (key: string) => string): CommandMetaMap {
   const commandMetaMap: CommandMetaMap = new Map();
 
-  commandMetaMap.set("Download vCard", { commandKind: "command" });
+  commandMetaMap.set(t("items.downloadVCard"), { commandKind: "command" });
 
-  commandMetaMap.set("Light", { commandKind: "command" });
-  commandMetaMap.set("Dark", { commandKind: "command" });
-  commandMetaMap.set("Auto", { commandKind: "command" });
+  commandMetaMap.set(t("items.light"), { commandKind: "command" });
+  commandMetaMap.set(t("items.dark"), { commandKind: "command" });
+  commandMetaMap.set(t("items.auto"), { commandKind: "command" });
 
-  commandMetaMap.set("Copy Mark as SVG", {
-    commandKind: "command",
-  });
-  commandMetaMap.set("Copy Logotype as SVG", {
-    commandKind: "command",
-  });
-  commandMetaMap.set("Download Brand Assets", {
-    commandKind: "command",
-  });
+  commandMetaMap.set(t("items.copyMark"), { commandKind: "command" });
+  commandMetaMap.set(t("items.copyLogotype"), { commandKind: "command" });
 
   SOCIAL_LINK_ITEMS.forEach((item) => {
     commandMetaMap.set(item.title, {
@@ -422,17 +440,17 @@ function buildCommandMetaMap() {
   return commandMetaMap;
 }
 
-const COMMAND_META_MAP = buildCommandMetaMap();
-
-const ENTER_ACTION_LABELS: Record<CommandKind, string> = {
-  command: "Run Command",
-  page: "Go to Page",
-  link: "Open Link",
-};
-
-function CommandMenuFooter() {
+function CommandMenuFooter({
+  metaMap,
+  enterActionLabels,
+  exitLabel,
+}: {
+  metaMap: CommandMetaMap;
+  enterActionLabels: Record<CommandKind, string>;
+  exitLabel: string;
+}) {
   const selectedCommandKind = useCommandState(
-    (state) => COMMAND_META_MAP.get(state.value)?.commandKind ?? "page"
+    (state) => metaMap.get(state.value)?.commandKind ?? "page"
   );
 
   return (
@@ -443,7 +461,7 @@ function CommandMenuFooter() {
         <KhoaMark className="size-6 text-muted-foreground" aria-hidden />
 
         <div className="flex shrink-0 items-center gap-2">
-          <span>{ENTER_ACTION_LABELS[selectedCommandKind]}</span>
+          <span>{enterActionLabels[selectedCommandKind]}</span>
           <CommandMenuKbd>
             <CornerDownLeftIcon />
           </CommandMenuKbd>
@@ -451,7 +469,7 @@ function CommandMenuFooter() {
             orientation="vertical"
             className="data-[orientation=vertical]:h-4"
           />
-          <span className="text-muted-foreground">Exit</span>
+          <span className="text-muted-foreground">{exitLabel}</span>
           <CommandMenuKbd>Esc</CommandMenuKbd>
         </div>
       </div>

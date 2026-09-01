@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { ArrowUpRightIcon } from "lucide-react";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import React from "react";
 
 import { getIcon, Icons } from "@/components/icons";
@@ -9,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 import type { Certification } from "../../types/certifications";
 
-export function CertificationItem({
+export async function CertificationItem({
   className,
   certification,
 }: {
@@ -17,6 +18,8 @@ export function CertificationItem({
   certification: Certification;
   theme?: boolean;
 }) {
+  const t = await getTranslations("a11y");
+
   return (
     <a
       className={cn("group/cert flex items-center pr-2", className)}
@@ -39,9 +42,10 @@ export function CertificationItem({
         <div
           className={cn(
             "mx-4 flex size-6 shrink-0 items-center justify-center rounded-lg select-none",
-            certification.issuerIconName === "google" || certification.issuerIconName === "anthropic"
+            certification.issuerIconName === "google" ||
+              certification.issuerIconName === "anthropic"
               ? "[&_svg]:size-6"
-              : "border border-muted-foreground/15 ring-1 ring-edge ring-offset-1 ring-offset-background bg-muted text-muted-foreground [&_svg]:size-4"
+              : "border border-muted-foreground/15 bg-muted text-muted-foreground ring-1 ring-edge ring-offset-1 ring-offset-background [&_svg]:size-4"
           )}
           aria-hidden
         >
@@ -56,7 +60,7 @@ export function CertificationItem({
 
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
           <dl>
-            <dt className="sr-only">Issued by</dt>
+            <dt className="sr-only">{t("issuedBy")}</dt>
             <dd>
               <span aria-hidden>@</span>
               <span className="ml-0.5">{certification.issuer}</span>
@@ -69,7 +73,7 @@ export function CertificationItem({
           />
 
           <dl>
-            <dt className="sr-only">Issued on</dt>
+            <dt className="sr-only">{t("issuedOn")}</dt>
             <dd>
               <time dateTime={dayjs(certification.issueDate).toISOString()}>
                 {dayjs(certification.issueDate).format("DD.MM.YYYY")}

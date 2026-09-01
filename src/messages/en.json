@@ -1,1 +1,104 @@
-{}
+{
+  "nav": {
+    "portfolio": "Portfolio",
+    "blog": "Blog"
+  },
+  "footer": {
+    "inspiredBy": "Inspired by tailwindcss.com & ui.shadcn.com",
+    "builtBy": "Built by a human. The source code is available on <github>GitHub</github>."
+  },
+  "commandMenu": {
+    "placeholder": "Type a command or search...",
+    "empty": "No results found.",
+    "search": "Search",
+    "headings": {
+      "menu": "Menu",
+      "portfolio": "Portfolio",
+      "blog": "Blog",
+      "components": "Components",
+      "socialLinks": "Social Links",
+      "brandAssets": "Brand Assets",
+      "theme": "Theme"
+    },
+    "items": {
+      "about": "About",
+      "techStack": "Tech Stack",
+      "experience": "Experience",
+      "projects": "Projects",
+      "awards": "Honors & Awards",
+      "certifications": "Certifications",
+      "testimonials": "Testimonials",
+      "downloadVCard": "Download vCard",
+      "light": "Light",
+      "dark": "Dark",
+      "auto": "Auto",
+      "copyMark": "Copy Mark as SVG",
+      "copyLogotype": "Copy Logotype as SVG"
+    },
+    "actions": {
+      "runCommand": "Run Command",
+      "goToPage": "Go to Page",
+      "openLink": "Open Link",
+      "exit": "Exit"
+    },
+    "toast": {
+      "copiedMark": "Copied Mark as SVG",
+      "copiedLogotype": "Copied Logotype as SVG"
+    }
+  },
+  "panels": {
+    "about": "About",
+    "stack": "Stack",
+    "experience": "Experience",
+    "projects": "Projects",
+    "awards": "Awards",
+    "certifications": "Certifications",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "brand": "Brand"
+  },
+  "a11y": {
+    "overview": "Overview",
+    "issuedBy": "Issued by",
+    "issuedOn": "Issued on",
+    "prize": "Prize",
+    "awardedIn": "Awarded in",
+    "receivedInGrade": "Received in Grade",
+    "openReferenceAttachment": "Open Reference Attachment",
+    "pronounceMyName": "Pronounce my name",
+    "githubContributions": "GitHub Contributions",
+    "employmentType": "Employment Type",
+    "employmentPeriod": "Employment Period",
+    "present": "Present",
+    "period": "Period",
+    "openProjectLink": "Open Project Link",
+    "socialLinks": "Social Links",
+    "currentEmployer": "Current Employer",
+    "testimonials": "Testimonials",
+    "restartAnimation": "Restart animation",
+    "home": "Home",
+    "toggleMenu": "Toggle Menu",
+    "rss": "RSS",
+    "dmca": "DMCA.com Protection Status"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "A collection of articles on development, design, and ideas.",
+    "backToPortfolio": "← Back to Portfolio",
+    "viewAll": "View All",
+    "allPosts": "All Posts",
+    "previous": "Previous",
+    "next": "Next",
+    "readTranslation": "Read in {language}"
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "en": "English",
+    "vi": "Tiếng Việt"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist.",
+    "backHome": "Back to home"
+  }
+}

@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { getTranslations } from "next-intl/server";
 
 import { KhoaMark } from "@/components/khoa-mark";
 import { KhoaWordmark } from "@/components/khoa-wordmark";
@@ -9,11 +10,13 @@ const BrandContextMenu = dynamic(() =>
   import("@/components/brand-context-menu").then((mod) => mod.BrandContextMenu)
 );
 
-export function Brand() {
+export async function Brand() {
+  const t = await getTranslations("panels");
+
   return (
     <Panel>
       <PanelHeader>
-        <PanelTitle>Brand</PanelTitle>
+        <PanelTitle>{t("brand")}</PanelTitle>
       </PanelHeader>
 
       <BrandContextMenu>

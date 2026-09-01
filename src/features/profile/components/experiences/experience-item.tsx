@@ -1,10 +1,17 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import React from "react";
 
 import type { Experience } from "../../types/experiences";
 import { ExperiencePositionItem } from "./experience-position-item";
 
-export function ExperienceItem({ experience }: { experience: Experience }) {
+export async function ExperienceItem({
+  experience,
+}: {
+  experience: Experience;
+}) {
+  const t = await getTranslations("a11y");
+
   return (
     <div className="screen-line-after space-y-4 py-4">
       <div className="flex items-center gap-3">
@@ -33,7 +40,7 @@ export function ExperienceItem({ experience }: { experience: Experience }) {
           <span className="relative flex items-center justify-center">
             <span className="absolute inline-flex size-3 animate-ping rounded-full bg-info opacity-50" />
             <span className="relative inline-flex size-2 rounded-full bg-info" />
-            <span className="sr-only">Current Employer</span>
+            <span className="sr-only">{t("currentEmployer")}</span>
           </span>
         )}
       </div>

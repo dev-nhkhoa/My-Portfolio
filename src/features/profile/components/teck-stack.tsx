@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import React from "react";
 
 import { SimpleTooltip } from "@/components/ui/tooltip";
@@ -7,11 +8,13 @@ import { cn } from "@/lib/utils";
 import { TECH_STACK } from "../data/tech-stack";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "./panel";
 
-export function TeckStack() {
+export async function TeckStack() {
+  const t = await getTranslations("panels");
+
   return (
     <Panel id="stack">
       <PanelHeader>
-        <PanelTitle>Stack</PanelTitle>
+        <PanelTitle>{t("stack")}</PanelTitle>
       </PanelHeader>
 
       <PanelContent

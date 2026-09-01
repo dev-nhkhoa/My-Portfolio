@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import {
   Marquee,
   MarqueeContent,
@@ -9,13 +11,15 @@ import { TESTIMONIALS_1, TESTIMONIALS_2 } from "../../data/testimonials";
 import { Panel } from "../panel";
 import { TestimonialItem } from "./testimonial-item";
 
-export function TestimonialsMarquee() {
+export async function TestimonialsMarquee() {
+  const t = await getTranslations("a11y");
+
   return (
     <Panel
       id="testimonials"
       className="before:z-11 after:z-10 [&_.rfm-initial-child-container]:items-stretch! [&_.rfm-marquee]:items-stretch!"
     >
-      <h2 className="sr-only">Testimonials</h2>
+      <h2 className="sr-only">{t("testimonials")}</h2>
 
       <Marquee>
         <MarqueeFade side="left" />

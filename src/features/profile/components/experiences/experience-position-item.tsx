@@ -1,4 +1,5 @@
 import { InfinityIcon } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import React from "react";
 
 import { Markdown } from "@/components/markdown";
@@ -16,13 +17,14 @@ import { cn } from "@/lib/utils";
 import type { ExperiencePosition } from "../../types/experiences";
 import { ExperienceIcon } from "./experience-position-icon";
 
-export function ExperiencePositionItem({
+export async function ExperiencePositionItem({
   position,
 }: {
   position: ExperiencePosition;
 }) {
   const { start, end } = position.employmentPeriod;
   const isOngoing = !end;
+  const t = await getTranslations("a11y");
 
   return (
     <CollapsibleWithContext defaultOpen={position.isExpanded} asChild>
@@ -61,7 +63,7 @@ export function ExperiencePositionItem({
             {position.employmentType && (
               <>
                 <dl>
-                  <dt className="sr-only">Employment Type</dt>
+                  <dt className="sr-only">{t("employmentType")}</dt>
                   <dd>{position.employmentType}</dd>
                 </dl>
 
@@ -73,7 +75,7 @@ export function ExperiencePositionItem({
             )}
 
             <dl>
-              <dt className="sr-only">Employment Period</dt>
+              <dt className="sr-only">{t("employmentPeriod")}</dt>
               <dd className="flex items-center gap-0.5">
                 <span>{start}</span>
                 <span className="font-mono">—</span>
@@ -83,7 +85,7 @@ export function ExperiencePositionItem({
                       className="size-4.5 translate-y-[0.5px]"
                       aria-hidden
                     />
-                    <span className="sr-only">Present</span>
+                    <span className="sr-only">{t("present")}</span>
                   </>
                 ) : (
                   <span>{end}</span>

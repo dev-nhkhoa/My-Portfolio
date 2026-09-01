@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { FileCheckIcon } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
 import { Icons } from "@/components/icons";
 import { Markdown } from "@/components/markdown";
@@ -15,7 +16,7 @@ import { Prose } from "@/components/ui/typography";
 
 import type { Award } from "../../types/awards";
 
-export function AwardItem({
+export async function AwardItem({
   className,
   award,
 }: {
@@ -23,6 +24,7 @@ export function AwardItem({
   award: Award;
 }) {
   const canExpand = !!award.description;
+  const t = await getTranslations("a11y");
 
   return (
     <CollapsibleWithContext disabled={!canExpand} asChild>
@@ -44,7 +46,7 @@ export function AwardItem({
 
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
                   <dl>
-                    <dt className="sr-only">Prize</dt>
+                    <dt className="sr-only">{t("prize")}</dt>
                     <dd>{award.prize}</dd>
                   </dl>
 
@@ -54,7 +56,7 @@ export function AwardItem({
                   />
 
                   <dl>
-                    <dt className="sr-only">Awarded in</dt>
+                    <dt className="sr-only">{t("awardedIn")}</dt>
                     <dd>
                       <time dateTime={dayjs(award.date).toISOString()}>
                         {dayjs(award.date).format("MM.YYYY")}
@@ -68,14 +70,14 @@ export function AwardItem({
                   />
 
                   <dl>
-                    <dt className="sr-only">Received in Grade</dt>
+                    <dt className="sr-only">{t("receivedInGrade")}</dt>
                     <dd>{award.grade}</dd>
                   </dl>
                 </div>
               </div>
 
               {award.referenceLink && (
-                <SimpleTooltip content="Open Reference Attachment">
+                <SimpleTooltip content={t("openReferenceAttachment")}>
                   <a
                     className="relative flex size-6 shrink-0 items-center justify-center text-muted-foreground after:absolute after:-inset-2 hover:text-foreground"
                     href={award.referenceLink}
@@ -86,7 +88,9 @@ export function AwardItem({
                       className="pointer-events-none size-4"
                       aria-hidden
                     />
-                    <span className="sr-only">Open Reference Attachment</span>
+                    <span className="sr-only">
+                      {t("openReferenceAttachment")}
+                    </span>
                   </a>
                 </SimpleTooltip>
               )}

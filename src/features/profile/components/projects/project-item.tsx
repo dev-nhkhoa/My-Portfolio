@@ -1,5 +1,6 @@
 import { InfinityIcon, LinkIcon } from "lucide-react";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import React from "react";
 
 import { Icons } from "@/components/icons";
@@ -18,7 +19,7 @@ import { addQueryParams } from "@/utils/url";
 
 import type { Project } from "../../types/projects";
 
-export function ProjectItem({
+export async function ProjectItem({
   className,
   project,
 }: {
@@ -27,6 +28,7 @@ export function ProjectItem({
 }) {
   const { start, end } = project.period;
   const isOngoing = !end;
+  const t = await getTranslations("a11y");
 
   return (
     <CollapsibleWithContext defaultOpen={project.isExpanded} asChild>
@@ -60,7 +62,7 @@ export function ProjectItem({
                 </h3>
 
                 <dl className="text-sm text-muted-foreground">
-                  <dt className="sr-only">Period</dt>
+                  <dt className="sr-only">{t("period")}</dt>
                   <dd className="flex items-center gap-0.5">
                     <span>{start}</span>
                     <span className="font-mono">—</span>
@@ -70,7 +72,7 @@ export function ProjectItem({
                           className="size-4.5 translate-y-[0.5px]"
                           aria-hidden
                         />
-                        <span className="sr-only">Present</span>
+                        <span className="sr-only">{t("present")}</span>
                       </>
                     ) : (
                       <span>{end}</span>
@@ -79,7 +81,7 @@ export function ProjectItem({
                 </dl>
               </div>
 
-              <SimpleTooltip content="Open Project Link">
+              <SimpleTooltip content={t("openProjectLink")}>
                 <a
                   className="relative flex size-6 shrink-0 items-center justify-center text-muted-foreground after:absolute after:-inset-2 hover:text-foreground"
                   href={addQueryParams(project.link, UTM_PARAMS)}
@@ -87,7 +89,7 @@ export function ProjectItem({
                   rel="noopener"
                 >
                   <LinkIcon className="pointer-events-none size-4" />
-                  <span className="sr-only">Open Project Link</span>
+                  <span className="sr-only">{t("openProjectLink")}</span>
                 </a>
               </SimpleTooltip>
 

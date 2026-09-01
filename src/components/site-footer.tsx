@@ -1,28 +1,34 @@
 import { RssIcon } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
 import { SITE_INFO, SOURCE_CODE_GITHUB_URL } from "@/config/site";
 
 import { Icons } from "./icons";
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const t = await getTranslations("footer");
+  const tA11y = await getTranslations("a11y");
+
   return (
     <footer className="max-w-screen overflow-x-hidden px-2">
       <div className="screen-line-before mx-auto border-x border-edge pt-4 md:max-w-3xl">
         <p className="mb-1 px-4 text-center font-mono text-sm text-balance text-muted-foreground">
-          Inspired by tailwindcss.com & ui.shadcn.com
+          {t("inspiredBy")}
         </p>
 
         <p className="mb-4 px-4 text-center font-mono text-sm text-balance text-muted-foreground">
-          Built by a human. The source code is available on{" "}
-          <a
-            className="link"
-            href={SOURCE_CODE_GITHUB_URL}
-            target="_blank"
-            rel="noopener"
-          >
-            GitHub
-          </a>
-          .
+          {t.rich("builtBy", {
+            github: (chunks) => (
+              <a
+                className="link"
+                href={SOURCE_CODE_GITHUB_URL}
+                target="_blank"
+                rel="noopener"
+              >
+                {chunks}
+              </a>
+            ),
+          })}
         </p>
 
         <div className="screen-line-before screen-line-after flex w-full before:z-1 after:z-1">
@@ -45,7 +51,7 @@ export function SiteFooter() {
               rel="noopener noreferrer"
             >
               <RssIcon className="size-4" />
-              <span className="sr-only">RSS</span>
+              <span className="sr-only">{tA11y("rss")}</span>
             </a>
 
             <Separator />
@@ -60,7 +66,7 @@ export function SiteFooter() {
               rel="noopener noreferrer"
             >
               <Icons.dmca className="h-5 w-auto" />
-              <span className="sr-only">DMCA.com Protection Status</span>
+              <span className="sr-only">{tA11y("dmca")}</span>
             </a>
           </div>
         </div>

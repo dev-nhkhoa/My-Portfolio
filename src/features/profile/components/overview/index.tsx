@@ -1,4 +1,5 @@
 import { MapPinIcon, MarsIcon, VenusIcon } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
 import { USER } from "@/features/profile/data/user";
 
@@ -14,10 +15,12 @@ import {
 import { JobItem } from "./job-item";
 import { PhoneItem } from "./phone-item";
 
-export function Overview() {
+export async function Overview() {
+  const t = await getTranslations("a11y");
+
   return (
     <Panel>
-      <h2 className="sr-only">Overview</h2>
+      <h2 className="sr-only">{t("overview")}</h2>
 
       <PanelContent className="space-y-2.5">
         <JobItem

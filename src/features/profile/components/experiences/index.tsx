@@ -1,14 +1,17 @@
+import { getTranslations } from "next-intl/server";
 import React from "react";
 
 import { EXPERIENCES } from "../../data/experiences";
 import { Panel, PanelHeader, PanelTitle } from "../panel";
 import { ExperienceItem } from "./experience-item";
 
-export function Experiences() {
+export async function Experiences() {
+  const t = await getTranslations("panels");
+
   return (
     <Panel id="experience">
       <PanelHeader>
-        <PanelTitle>Experience</PanelTitle>
+        <PanelTitle>{t("experience")}</PanelTitle>
       </PanelHeader>
 
       <div className="pr-2 pl-4">

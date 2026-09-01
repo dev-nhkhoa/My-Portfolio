@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { getTranslations } from "next-intl/server";
 
 import { CollapsibleList } from "@/components/collapsible-list";
 
@@ -10,12 +11,14 @@ const SORTED_AWARDS = [...AWARDS].sort((a, b) => {
   return dayjs(b.date).diff(dayjs(a.date));
 });
 
-export function Awards() {
+export async function Awards() {
+  const t = await getTranslations("panels");
+
   return (
     <Panel id="awards">
       <PanelHeader>
         <PanelTitle>
-          Honors & Awards
+          {t("awards")}
           <sup className="ml-1 font-mono text-sm font-medium text-muted-foreground select-none">
             ({AWARDS.length})
           </sup>

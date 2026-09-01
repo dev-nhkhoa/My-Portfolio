@@ -1,1 +1,104 @@
-{}
+{
+  "nav": {
+    "portfolio": "Hồ sơ",
+    "blog": "Blog"
+  },
+  "footer": {
+    "inspiredBy": "Lấy cảm hứng từ tailwindcss.com & ui.shadcn.com",
+    "builtBy": "Được xây dựng bởi một con người. Mã nguồn có sẵn trên <github>GitHub</github>."
+  },
+  "commandMenu": {
+    "placeholder": "Nhập lệnh hoặc tìm kiếm...",
+    "empty": "Không tìm thấy kết quả.",
+    "search": "Tìm kiếm",
+    "headings": {
+      "menu": "Menu",
+      "portfolio": "Hồ sơ",
+      "blog": "Blog",
+      "components": "Thành phần",
+      "socialLinks": "Mạng xã hội",
+      "brandAssets": "Tài nguyên thương hiệu",
+      "theme": "Giao diện"
+    },
+    "items": {
+      "about": "Giới thiệu",
+      "techStack": "Công nghệ",
+      "experience": "Kinh nghiệm",
+      "projects": "Dự án",
+      "awards": "Giải thưởng & Vinh danh",
+      "certifications": "Chứng chỉ",
+      "testimonials": "Nhận xét",
+      "downloadVCard": "Tải vCard",
+      "light": "Sáng",
+      "dark": "Tối",
+      "auto": "Tự động",
+      "copyMark": "Sao chép Logo dạng SVG",
+      "copyLogotype": "Sao chép Chữ ký dạng SVG"
+    },
+    "actions": {
+      "runCommand": "Chạy lệnh",
+      "goToPage": "Đến trang",
+      "openLink": "Mở liên kết",
+      "exit": "Thoát"
+    },
+    "toast": {
+      "copiedMark": "Đã sao chép Logo dạng SVG",
+      "copiedLogotype": "Đã sao chép Chữ ký dạng SVG"
+    }
+  },
+  "panels": {
+    "about": "Giới thiệu",
+    "stack": "Công nghệ",
+    "experience": "Kinh nghiệm",
+    "projects": "Dự án",
+    "awards": "Giải thưởng",
+    "certifications": "Chứng chỉ",
+    "faq": "Câu hỏi thường gặp",
+    "blog": "Blog",
+    "brand": "Thương hiệu"
+  },
+  "a11y": {
+    "overview": "Tổng quan",
+    "issuedBy": "Cấp bởi",
+    "issuedOn": "Ngày cấp",
+    "prize": "Giải thưởng",
+    "awardedIn": "Trao vào",
+    "receivedInGrade": "Nhận ở khối lớp",
+    "openReferenceAttachment": "Mở tệp tham chiếu",
+    "pronounceMyName": "Phát âm tên tôi",
+    "githubContributions": "Đóng góp trên GitHub",
+    "employmentType": "Loại hình công việc",
+    "employmentPeriod": "Thời gian làm việc",
+    "present": "Hiện tại",
+    "period": "Thời gian",
+    "openProjectLink": "Mở liên kết dự án",
+    "socialLinks": "Mạng xã hội",
+    "currentEmployer": "Nơi làm việc hiện tại",
+    "testimonials": "Nhận xét",
+    "restartAnimation": "Khởi động lại hoạt ảnh",
+    "home": "Trang chủ",
+    "toggleMenu": "Bật/tắt menu",
+    "rss": "RSS",
+    "dmca": "Trạng thái bảo vệ DMCA.com"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Tuyển tập các bài viết về phát triển, thiết kế và ý tưởng.",
+    "backToPortfolio": "← Quay lại Hồ sơ",
+    "viewAll": "Xem tất cả",
+    "allPosts": "Tất cả bài viết",
+    "previous": "Trước",
+    "next": "Sau",
+    "readTranslation": "Đọc bằng {language}"
+  },
+  "languageSwitcher": {
+    "label": "Ngôn ngữ",
+    "en": "English",
+    "vi": "Tiếng Việt"
+  },
+  "notFound": {
+    "title": "Không tìm thấy trang",
+    "description": "Trang bạn đang tìm kiếm không tồn tại.",
+    "backHome": "Về trang chủ"
+  }
+}

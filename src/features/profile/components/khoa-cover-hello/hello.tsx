@@ -2,6 +2,7 @@
 
 import { RepeatIcon } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import React, { useCallback, useEffect, useState } from "react";
 
 import { KhoaMark } from "@/components/khoa-mark";
@@ -13,6 +14,7 @@ const layers = ["xin-chao", "nhkhoa-mark"] as const;
 
 export function Hello() {
   const [currentIndex, setCurrentIndex] = useState(1);
+  const t = useTranslations("a11y");
 
   const canRestart = currentIndex === layers.length - 1;
 
@@ -80,7 +82,7 @@ export function Hello() {
             }}
           >
             <RepeatIcon />
-            <span className="sr-only">Restart animation</span>
+            <span className="sr-only">{t("restartAnimation")}</span>
           </Button>
         </SimpleTooltip>
       </div>

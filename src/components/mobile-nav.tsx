@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,15 +11,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
-import type { NavItem } from "@/types/nav";
+import type { ResolvedNavItem } from "@/types/nav";
 
 export function MobileNav({
   items,
   className,
 }: {
-  items: NavItem[];
+  items: ResolvedNavItem[];
   className?: string;
 }) {
+  const t = useTranslations("a11y");
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -31,7 +35,7 @@ export function MobileNav({
         >
           <span className="flex h-0.5 w-4 transform rounded-[1px] bg-foreground transition-transform group-data-[state=open]/toggle:translate-y-[3px] group-data-[state=open]/toggle:rotate-45" />
           <span className="flex h-0.5 w-4 transform rounded-[1px] bg-foreground transition-transform group-data-[state=open]/toggle:translate-y-[-3px] group-data-[state=open]/toggle:-rotate-45" />
-          <span className="sr-only">Toggle Menu</span>
+          <span className="sr-only">{t("toggleMenu")}</span>
         </Button>
       </DropdownMenuTrigger>
 
