@@ -27,7 +27,8 @@ import { TestimonialsMarquee } from "@/features/profile/components/testimonials-
 import { FAQ as FAQ_ITEMS } from "@/features/profile/data/faq";
 import { SOCIAL_LINKS } from "@/features/profile/data/social-links";
 import { USER } from "@/features/profile/data/user";
-import { routing } from "@/i18n/routing";
+import { resolveLocalized } from "@/i18n/localized";
+import { type Locale, routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 export default async function Page({
@@ -53,7 +54,7 @@ export default async function Page({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(getFaqJsonLd()).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(getFaqJsonLd(locale)).replace(/</g, "\\u003c"),
         }}
       />
 
@@ -169,16 +170,16 @@ function getPageJsonLd(): WithContext<PageSchema> {
  * Mirrors the visible FAQ section. Both must stay in sync — FAQ schema whose
  * answers are absent from the page violates Google's structured-data policy.
  */
-function getFaqJsonLd(): WithContext<FAQSchema> {
+function getFaqJsonLd(locale: Locale): WithContext<FAQSchema> {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: FAQ_ITEMS.map((item) => ({
       "@type": "Question",
-      name: item.question,
+      name: resolveLocalized(item.question, locale),
       acceptedAnswer: {
         "@type": "Answer",
-        text: item.answer,
+        text: resolveLocalized(item.answer, locale),
       },
     })),
   };
