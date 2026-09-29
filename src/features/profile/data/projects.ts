@@ -23,6 +23,33 @@ export const PROJECTS: Project[] = [
     logoDark: "/logos/sakura-dark.png",
   },
   {
+    id: "tooltasted",
+    title: {
+      en: "ToolTasted - AI & SaaS Tool Guides",
+      vi: "ToolTasted - Hướng dẫn chọn công cụ AI & SaaS",
+    },
+    period: { start: "09.2026" },
+    link: "https://tooltasted.com",
+    skills: [
+      "Next.js",
+      "TypeScript",
+      "MDX",
+      "Internationalization",
+      "Technical SEO",
+      "Cloudflare Workers",
+    ],
+    isExpanded: true,
+    description: {
+      en: `An English–Vietnamese website helping readers choose AI and SaaS tools based on their workflows, costs, and constraints. I built the site and its MDX publishing system as a personal project to learn how to build and operate a product, with source-backed comparisons and practical resources for developers.
+
+[Why I built ToolTasted](/en/blog/why-i-built-tooltasted)`,
+      vi: `Website Anh–Việt giúp người đọc lựa chọn công cụ AI và SaaS theo công việc, chi phí và giới hạn thực tế. Mình tự xây dựng website cùng hệ thống xuất bản MDX để học cách xây và vận hành một sản phẩm, với nội dung so sánh có dẫn nguồn và tài nguyên thực hành dành cho developer.
+
+[Vì sao mình xây dựng ToolTasted](/vi/blog/vi-sao-minh-xay-dung-tooltasted)`,
+    },
+    logo: "/logos/tooltasted.png",
+  },
+  {
     id: "vnx-academy",
     title: {
       en: "VnX Academy - Graduation Project",
