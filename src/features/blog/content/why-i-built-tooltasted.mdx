@@ -1,0 +1,89 @@
+---
+title: "ToolTasted: Learning to Build and Run My Own Product"
+description: "Why I built ToolTasted, an AI and SaaS tool guide, to learn product development, content publishing, and what it takes to keep a product useful after launch."
+createdAt: "2026-09-29"
+updatedAt: "2026-09-29"
+category: "Building Products"
+tags:
+  [
+    "ToolTasted",
+    "Product Development",
+    "AI Tools",
+    "Next.js",
+    "Content Strategy",
+  ]
+pinned: false
+draft: false
+locale: "en"
+translationKey: "building-tooltasted"
+---
+
+I started ToolTasted in September 2026 to learn how to build and run a product of my own. I wanted to go beyond getting a website to work: choosing a problem, publishing something useful, finding readers, and taking responsibility for updates after launch.
+
+I chose to build a website that helps people select AI and SaaS tools. The scope is small enough for me to handle the whole project, but it raises questions that code alone cannot answer. Who needs this information? What decision are they trying to make? Why should they trust a recommendation?
+
+## What is ToolTasted?
+
+[ToolTasted](https://tooltasted.com/en) is where I publish guides and comparisons built around specific uses for software. Rather than stopping at a feature list, I want to explain who a tool suits, where its limits matter, and when another option makes more sense.
+
+The current focus is voice tools and developer workflows: dictating prompts, writing commit messages, processing notes, and choosing between on-device and cloud speech recognition.
+
+For example, choosing a dictation tool involves more than checking whether it supports Vietnamese. A reader also needs to know which devices it works on, where audio and text are processed, whether the free plan is sufficient, and how much editing the output needs.
+
+Those are the decisions I want ToolTasted to support. More features do not necessarily make a tool a better fit for the task at hand.
+
+## Why build a content website?
+
+My main motivation is learning how to take responsibility for a product from its initial direction through ongoing operation. I handle the entire ToolTasted project myself, including its interface, publishing system, and content.
+
+A content website makes me pay attention to things that are easy to overlook when concentrating on software. A page can render correctly without helping anyone make a decision. An article can be accurate when published and become misleading after a vendor changes its pricing or plan limits.
+
+I chose AI and SaaS because they are close to my work with workflows and automation. The perspective I want to bring is practical: which step does this tool solve, what conditions does it need, and what work remains for the person using it?
+
+ToolTasted also gives me a concrete product on which to learn content distribution. SEO and discovery through AI search are areas I want to explore. Making content accessible to crawlers does not mean a website will rank or receive AI citations. I see that work as a foundation for experiments and measurement, not an outcome I can already claim.
+
+## A recommendation should explain its evidence
+
+The name ToolTasted suggests trying software before judging it. But a name is not evidence. I do not want readers to assume every article comes from months of hands-on use.
+
+The current Wispr Flow series mainly analyzes cited product documentation. A source-verification date records when information was checked, not when a hands-on experiment was completed.
+
+The [ToolTasted editorial methodology](https://tooltasted.com/en/methodology) separates three kinds of statements:
+
+- **Vendor claims:** features, pricing, supported devices, and conditions, with sources readers can inspect.
+- **Editorial judgments:** my interpretation of those facts for a particular situation.
+- **Hands-on findings:** observations that need a setup, test date, inputs, outputs, and an explanation of limitations.
+
+That distinction also appears in the publishing system. An article declaring a hands-on test date must include an evidence field. The check cannot establish whether the evidence is valid, but it creates a reminder not to present documentation research as product experience.
+
+I want to keep that boundary even when it leaves an article with fewer conclusions. Stating what is still unknown is more useful than publishing a ranking without supporting data.
+
+## Giving readers something they can use
+
+I want ToolTasted to offer resources readers can use to evaluate their own choices, rather than asking them to accept a verdict.
+
+The repository includes Vietnamese and mixed Vietnamese–English sample sentences, prompt templates, checklists, an n8n workflow, and a script for summarizing dictation results. These provide a starting point for a specific task or test.
+
+For instance, the [dictation benchmark preparation kit](https://tooltasted.com/en/blog/ai-dictation-developer-benchmark) explains how to record whether meaning and technical terms survive dictation, alongside correction time. It is not a completed comparison of speech tools. The script summarizes data entered by the user; it does not listen to audio or decide which product is best.
+
+That is a direction I want to develop further. An article does not always need to name a winner, but it should help readers understand what to do next.
+
+## Building around the publishing work
+
+I built ToolTasted with Next.js, TypeScript, and Tailwind CSS. Articles live as MDX files in Git, and the deployment configuration uses Cloudflare Workers through OpenNext.
+
+Content is compiled before it runs on Workers. The preparation step checks metadata, dates, drafts, and published language versions. The website also includes canonical URLs, a sitemap, and structured data to describe its content to search engines.
+
+I chose Git-based content instead of adding a CMS at this stage. That fits a project where one person writes articles and develops the website, while keeping the history of content changes alongside code. The trade-off is that editing content is tied to the build and publishing process. If nontechnical contributors join later, I will need to revisit that choice.
+
+## What I want ToolTasted to become
+
+For now, I want to improve the topic area already covered rather than expand into a large directory of tools. My priority is a collection of focused articles with current sources and resources people can actually use.
+
+For readers, the goal is to identify tools worth trying and questions worth checking before paying. As I add hands-on work, I want to publish enough context and data for someone else to understand the findings, rather than simply showing them a score.
+
+For myself, I want to learn what happens after launch: deciding which articles need attention, listening to feedback, tracking discovery, and choosing what to work on next. Those are the things I want to judge the project by, not just the number of pages I have built.
+
+Affiliate links are part of the model I want to explore to support the site's upkeep. Some links may earn a commission when readers sign up. Those relationships need to be disclosed and should not determine recommendations. I am not presenting ToolTasted as a revenue success story. It is still a project through which I am learning how to build and operate a product.
+
+If you are choosing between voice tools, start with the [guides on ToolTasted](https://tooltasted.com/en/blog). If an article does not answer your situation, [send me the specifics](https://nhkhoa.site/en): what you are trying to do, which device you use, and where you get stuck. That is the kind of feedback I want to use when deciding what to write or improve next.
