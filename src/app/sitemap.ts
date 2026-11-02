@@ -18,7 +18,7 @@ function languageAlternates(route: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/blog", "/internal-project"];
+  const staticRoutes = ["", "/blog", "/ai", "/internal-project"];
 
   const routeEntries: MetadataRoute.Sitemap = staticRoutes.flatMap((route) =>
     routing.locales.map((locale) => ({

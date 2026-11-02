@@ -1,7 +1,8 @@
 {
   "nav": {
     "portfolio": "Portfolio",
-    "blog": "Blog"
+    "blog": "Blog",
+    "ai": "AI"
   },
   "footer": {
     "inspiredBy": "Inspired by tailwindcss.com & ui.shadcn.com",
@@ -114,5 +115,13 @@
     "title": "Page not found",
     "description": "The page you are looking for does not exist.",
     "backHome": "Back to home"
+  },
+  "ai": {
+    "title": "AI playground",
+    "description": "Where Khoa experiments with AI-generated videos and images, made for AI films, AI TVCs and more.",
+    "about": "Where Khoa experiments with AI-generated videos and images, made for AI films, AI TVCs and more.",
+    "spotifyConcerts": "Spotify concept 1",
+    "spotifyWero": "Spotify concept 2",
+    "dontLeaveMeAlone": "DON'T LEAVE ME ALONE"
   }
 }

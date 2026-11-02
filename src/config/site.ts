@@ -23,6 +23,10 @@ export const MAIN_NAV: NavItem[] = [
     titleKey: "blog",
     href: "/blog",
   },
+  {
+    titleKey: "ai",
+    href: "/ai",
+  },
   // {
   //   titleKey: "components",
   //   href: "/components",

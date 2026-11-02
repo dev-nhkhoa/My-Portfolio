@@ -1,7 +1,8 @@
 {
   "nav": {
     "portfolio": "Hồ sơ",
-    "blog": "Blog"
+    "blog": "Blog",
+    "ai": "AI"
   },
   "footer": {
     "inspiredBy": "Lấy cảm hứng từ tailwindcss.com & ui.shadcn.com",
@@ -114,5 +115,13 @@
     "title": "Không tìm thấy trang",
     "description": "Trang bạn đang tìm kiếm không tồn tại.",
     "backHome": "Về trang chủ"
+  },
+  "ai": {
+    "title": "AI playground",
+    "description": "Nơi Khoa thử nghiệm video và hình ảnh do AI tạo ra cho AI Film, AI TVC và nhiều thứ khác.",
+    "about": "Nơi Khoa thử nghiệm video và hình ảnh do AI tạo ra cho AI Film, AI TVC và nhiều thứ khác.",
+    "spotifyConcerts": "Spotify concept 1",
+    "spotifyWero": "Spotify concept 2",
+    "dontLeaveMeAlone": "DON'T LEAVE ME ALONE"
   }
 }
