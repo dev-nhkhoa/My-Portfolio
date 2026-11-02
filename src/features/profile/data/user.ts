@@ -13,14 +13,8 @@ export const USER: User = {
   },
   timeZone: "Asia/Ho_Chi_Minh",
   flipSentences: {
-    en: [
-      "AI Workflow & Automation Engineer",
-      "Building [@Sakura - Voice Expense Tracker](https://sakuramoney.app)",
-    ],
-    vi: [
-      "AI Workflow & Automation Engineer",
-      "Đang phát triển app [@Sakura - Voice Expense Tracker](https://sakuramoney.app)",
-    ],
+    en: ["AI Workflow & Automation Engineer", "AI Film Maker & AI Freelancer"],
+    vi: ["AI Workflow & Automation Engineer", "AI Film Maker & AI Freelancer"],
   },
   address: "Ho Chi Minh City, Vietnam",
   phoneNumber: "Kzg0Nzk2ODAyMzk5", // E.164 format: +84 796 802 399, base64 encoded
@@ -49,8 +43,8 @@ export const USER: User = {
     },
   ],
   about: {
-    en: `**AI Workflow & Automation Engineer** at VML`,
-    vi: `**AI Workflow & Automation Engineer** at VML`,
+    en: `Hi, I'm Khoa! I'm currently an AI Automation Engineer at VML. I'm into everything AI, from coding to image and video generation. Besides building automation systems, I'm also a part-time AI Film Maker in my spare time :)`,
+    vi: `Xin chào, mình là Khoa! Mình hiện tại đang là AI Automation Engineer tại VML. Mình hứng thú tất cả mọi thứ liên quan đến AI từ coding, tạo ảnh, tạo video,... Ngoài việc xây dựng các kiến trúc hệ thống tự động hóa, mình còn là một part-time AI Film Maker trong thời gian rảnh :)`,
   },
   avatar: "/images/me.png",
   ogImage: "/images/og-image-light.png",

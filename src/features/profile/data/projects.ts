@@ -7,14 +7,14 @@ export const PROJECTS: Project[] = [
       en: "Sakura - Voice Expense Tracker",
       vi: "Sakura - Voice Expense Tracker",
     },
-    period: { start: "4.2026" },
+    period: { start: "04.2026" },
     link: "https://sakuramoney.app",
     skills: [
       "Artificial Intelligence (AI)",
       "Large Language Model (LLM)",
       "Full-Stack Development",
     ],
-    isExpanded: true,
+    isExpanded: false,
     description: {
       en: `An IOS Native app that make managing personal finance simple stress less.`,
       vi: `App IOS mang lại trải nghiệm quản lý tài chính cá nhân một cách dễ dàng và nhẹ nhàng.`,
@@ -38,7 +38,7 @@ export const PROJECTS: Project[] = [
       "Technical SEO",
       "Cloudflare Workers",
     ],
-    isExpanded: true,
+    isExpanded: false,
     description: {
       en: `An English–Vietnamese website helping readers choose AI and SaaS tools based on their workflows, costs, and constraints. I built the site and its MDX publishing system as a personal project to learn how to build and operate a product, with source-backed comparisons and practical resources for developers.
 
@@ -62,7 +62,7 @@ export const PROJECTS: Project[] = [
       "Large Language Model (LLM)",
       "Business Analytics",
     ],
-    isExpanded: true,
+    isExpanded: false,
     description: {
       en: `AI-powered learning platform like Coursera or Udemy, offering personalized course recommendations.`,
       vi: `Nền tảng học tập trực tuyến tương tự Coursera hay Udemy được tích hợp AI để tối ưu hóa việc gợi ý các khóa học cá nhân hóa cho người dùng.`,
