@@ -6,10 +6,14 @@ import { SimpleTooltip } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 import { TECH_STACK } from "../data/tech-stack";
+import type { TechStackCategory } from "../types/tech-stack";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "./panel";
+
+const CATEGORIES: TechStackCategory[] = ["ai", "designing", "coding"];
 
 export async function TeckStack() {
   const t = await getTranslations("panels");
+  const tCategories = await getTranslations("stackCategories");
 
   return (
     <Panel id="stack">
@@ -24,36 +28,47 @@ export async function TeckStack() {
           "bg-zinc-950/0.75 dark:bg-white/0.75"
         )}
       >
-        <ul className="flex flex-wrap gap-4 select-none">
-          {TECH_STACK.map((tech) => {
-            return (
-              <li key={tech.key} className="flex">
-                <SimpleTooltip content={tech.title}>
-                  <a
-                    href={tech.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={tech.title}
-                    className="transition-transform hover:scale-110"
-                  >
-                    <Image
-                      src={tech.iconUrl}
-                      alt={`${tech.title} icon`}
-                      width={32}
-                      height={32}
-                      unoptimized
-                      className={cn(
-                        "h-8 w-8 object-contain",
-                        tech.theme && "dark:invert"
-                      )}
-                    />
-                    <span className="sr-only">{tech.title}</span>
-                  </a>
-                </SimpleTooltip>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="space-y-5">
+          {CATEGORIES.map((category) => (
+            <div key={category} className="space-y-3">
+              <h3 className="font-mono text-sm text-muted-foreground">
+                {tCategories(category)}
+              </h3>
+              <ul className="flex flex-wrap gap-4 select-none">
+                {TECH_STACK.filter((tech) => tech.category === category).map(
+                  (tech) => {
+                    return (
+                      <li key={tech.key} className="flex">
+                        <SimpleTooltip content={tech.title}>
+                          <a
+                            href={tech.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={tech.title}
+                            className="transition-transform hover:scale-110"
+                          >
+                            <Image
+                              src={tech.iconUrl}
+                              alt={`${tech.title} icon`}
+                              width={32}
+                              height={32}
+                              unoptimized
+                              className={cn(
+                                "h-8 w-8 object-contain",
+                                tech.theme && "dark:invert"
+                              )}
+                            />
+                            <span className="sr-only">{tech.title}</span>
+                          </a>
+                        </SimpleTooltip>
+                      </li>
+                    );
+                  }
+                )}
+              </ul>
+            </div>
+          ))}
+        </div>
       </PanelContent>
     </Panel>
   );

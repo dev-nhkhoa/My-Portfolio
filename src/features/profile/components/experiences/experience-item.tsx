@@ -1,78 +1,18 @@
-import Image from "next/image";
-import { getTranslations } from "next-intl/server";
 import React from "react";
 
 import type { Experience } from "../../types/experiences";
 import { ExperiencePositionItem } from "./experience-position-item";
 
-export async function ExperienceItem({
-  experience,
-}: {
-  experience: Experience;
-}) {
-  const t = await getTranslations("a11y");
-
+export function ExperienceItem({ experience }: { experience: Experience }) {
   return (
-    <div className="screen-line-after space-y-4 py-4">
-      <div className="flex items-center gap-3">
-        <div className="flex size-7 shrink-0 items-center justify-center select-none">
-          {experience.companyLogo ? (
-            experience.companyLogoDark ? (
-              <>
-                <Image
-                  src={experience.companyLogo}
-                  alt={experience.companyName}
-                  width={28}
-                  height={28}
-                  quality={100}
-                  className="rounded-full dark:hidden"
-                  unoptimized
-                  aria-hidden
-                />
-                <Image
-                  src={experience.companyLogoDark}
-                  alt={experience.companyName}
-                  width={28}
-                  height={28}
-                  quality={100}
-                  className="hidden rounded-full dark:block"
-                  unoptimized
-                  aria-hidden
-                />
-              </>
-            ) : (
-              <Image
-                src={experience.companyLogo}
-                alt={experience.companyName}
-                width={28}
-                height={28}
-                quality={100}
-                className={`rounded-full ${experience.theme && "not-dark:invert"}`}
-                unoptimized
-                aria-hidden
-              />
-            )
-          ) : (
-            <span className="flex size-2 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-          )}
-        </div>
-
-        <h3 className="text-lg leading-snug font-medium">
-          {experience.companyName}
-        </h3>
-
-        {experience.isCurrentEmployer && (
-          <span className="relative flex items-center justify-center">
-            <span className="absolute inline-flex size-3 animate-ping rounded-full bg-info opacity-50" />
-            <span className="relative inline-flex size-2 rounded-full bg-info" />
-            <span className="sr-only">{t("currentEmployer")}</span>
-          </span>
-        )}
-      </div>
-
+    <div className="screen-line-after py-4">
       <div className="relative space-y-4 before:absolute before:left-3 before:h-full before:w-px before:bg-border">
         {experience.positions.map((position) => (
-          <ExperiencePositionItem key={position.id} position={position} />
+          <ExperiencePositionItem
+            key={position.id}
+            experience={experience}
+            position={position}
+          />
         ))}
       </div>
     </div>

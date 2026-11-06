@@ -7,12 +7,12 @@ import {
   CircleUserIcon,
   CornerDownLeftIcon,
   LetterTextIcon,
-  MessageCircleMoreIcon,
   MoonStarIcon,
   RssIcon,
   SunIcon,
   TextIcon,
   TypeIcon,
+  UsersIcon,
 } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -85,24 +85,9 @@ const PORTFOLIO_LINKS: CommandLinkDef[] = [
     icon: BriefcaseBusinessIcon,
   },
   {
-    titleKey: "items.projects",
-    href: "/#projects",
-    icon: Icons.project,
-  },
-  {
-    titleKey: "items.awards",
-    href: "/#awards",
-    icon: Icons.award,
-  },
-  {
-    titleKey: "items.certifications",
-    href: "/#certs",
-    icon: Icons.certificate,
-  },
-  {
-    titleKey: "items.testimonials",
-    href: "/#testimonials",
-    icon: MessageCircleMoreIcon,
+    titleKey: "items.clients",
+    href: "/#clients",
+    icon: UsersIcon,
   },
   {
     titleKey: "items.downloadVCard",

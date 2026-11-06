@@ -35,6 +35,8 @@ export type Experience = {
   /** Optional dark-mode variant of the logo. When set, `companyLogo` is used for
    * light mode and this for dark mode (instead of CSS inversion). */
   companyLogoDark?: string;
+  /** Company website; the company name links here when set. */
+  companyWebsite?: string;
   /** Roles held at this company; keep newest first for display. */
   positions: ExperiencePosition[];
   /** Marks the company as the current employer for highlighting. */

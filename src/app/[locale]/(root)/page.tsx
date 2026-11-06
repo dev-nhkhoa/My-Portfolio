@@ -7,19 +7,16 @@ import type { ProfilePage as PageSchema, WithContext } from "schema-dts";
 
 import { SITE_INFO } from "@/config/site";
 import { About } from "@/features/profile/components/about";
-import { Awards } from "@/features/profile/components/awards";
 import { Blog } from "@/features/profile/components/blog";
 import { Brand } from "@/features/profile/components/brand";
-import { Certifications } from "@/features/profile/components/certifications";
+import { Clients } from "@/features/profile/components/clients";
 import { Experiences } from "@/features/profile/components/experiences";
-import { GitHubContributions } from "@/features/profile/components/github-contributions";
 import { Overview } from "@/features/profile/components/overview";
 import { ProfileCover } from "@/features/profile/components/profile-cover";
 import { ProfileHeader } from "@/features/profile/components/profile-header";
-import { Projects } from "@/features/profile/components/projects";
 import { SocialLinks } from "@/features/profile/components/social-links";
 import { TeckStack } from "@/features/profile/components/teck-stack";
-import { TestimonialsMarquee } from "@/features/profile/components/testimonials-marquee";
+import { CLIENTS } from "@/features/profile/data/clients";
 import { SOCIAL_LINKS } from "@/features/profile/data/social-links";
 import { USER } from "@/features/profile/data/user";
 import { resolveLocalized } from "@/i18n/localized";
@@ -81,12 +78,6 @@ export default async function Page({
         <About />
         <Separator />
 
-        <GitHubContributions />
-        <Separator />
-
-        {/* <TestimonialsMarquee />
-        <Separator /> */}
-
         <TeckStack />
         <Separator />
 
@@ -96,14 +87,12 @@ export default async function Page({
         <Experiences />
         <Separator />
 
-        <Projects />
-        <Separator />
-
-        <Awards />
-        <Separator />
-
-        <Certifications />
-        <Separator />
+        {CLIENTS.length > 0 && (
+          <>
+            <Clients />
+            <Separator />
+          </>
+        )}
 
         <Brand />
         <Separator />
@@ -142,11 +131,6 @@ function getPageJsonLd(locale: Locale): WithContext<PageSchema> {
           ...(currentJob.website && { url: currentJob.website }),
         },
       }),
-      alumniOf: {
-        "@type": "CollegeOrUniversity",
-        name: "Van Lang University",
-        url: "https://vlu.edu.vn/",
-      },
       address: {
         "@type": "PostalAddress",
         addressLocality: "Ho Chi Minh City",
@@ -158,13 +142,11 @@ function getPageJsonLd(locale: Locale): WithContext<PageSchema> {
       },
       knowsAbout: [
         "AI workflow automation",
-        "Agentic RAG",
-        "Large Language Models",
+        "AI video generation",
+        "AI filmmaking",
         "n8n",
-        "LangChain",
         "Make.com",
-        "TypeScript",
-        "Next.js",
+        "ComfyUI",
         "Prompt engineering",
       ],
       knowsLanguage: ["Vietnamese", "English"],

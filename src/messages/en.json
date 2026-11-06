@@ -26,7 +26,7 @@
       "techStack": "Tech Stack",
       "experience": "Experience",
       "projects": "Projects",
-      "awards": "Honors & Awards",
+      "clients": "Clients",
       "certifications": "Certifications",
       "testimonials": "Testimonials",
       "downloadVCard": "Download vCard",
@@ -52,10 +52,15 @@
     "stack": "Stack",
     "experience": "Experience",
     "projects": "Projects",
-    "awards": "Awards",
+    "clients": "Clients",
     "certifications": "Certifications",
     "blog": "Blog",
     "brand": "Brand"
+  },
+  "stackCategories": {
+    "ai": "AI",
+    "designing": "Designing",
+    "coding": "Coding"
   },
   "overview": {
     "jobConnector": "at"
@@ -76,7 +81,7 @@
     "period": "Period",
     "openProjectLink": "Open Project Link",
     "socialLinks": "Social Links",
-    "currentEmployer": "Current Employer",
+    "currentlyWorkingHere": "Currently working here",
     "testimonials": "Testimonials",
     "restartAnimation": "Restart animation",
     "pinned": "Pinned",

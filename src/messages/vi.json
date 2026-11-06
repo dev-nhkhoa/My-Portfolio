@@ -26,7 +26,7 @@
       "techStack": "Công nghệ",
       "experience": "Kinh nghiệm",
       "projects": "Dự án",
-      "awards": "Giải thưởng & Vinh danh",
+      "clients": "Khách hàng",
       "certifications": "Chứng chỉ",
       "testimonials": "Nhận xét",
       "downloadVCard": "Tải vCard",
@@ -52,10 +52,15 @@
     "stack": "Công nghệ",
     "experience": "Kinh nghiệm",
     "projects": "Dự án",
-    "awards": "Giải thưởng",
+    "clients": "Khách hàng",
     "certifications": "Chứng chỉ",
     "blog": "Blog",
     "brand": "Thương hiệu"
+  },
+  "stackCategories": {
+    "ai": "AI",
+    "designing": "Thiết kế",
+    "coding": "Lập trình"
   },
   "overview": {
     "jobConnector": "tại"
@@ -76,7 +81,7 @@
     "period": "Thời gian",
     "openProjectLink": "Mở liên kết dự án",
     "socialLinks": "Mạng xã hội",
-    "currentEmployer": "Nơi làm việc hiện tại",
+    "currentlyWorkingHere": "Đang làm việc tại đây",
     "testimonials": "Nhận xét",
     "restartAnimation": "Khởi động lại hoạt ảnh",
     "pinned": "Đã ghim",

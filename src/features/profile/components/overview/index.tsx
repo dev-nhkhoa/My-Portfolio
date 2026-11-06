@@ -36,12 +36,6 @@ export async function Overview() {
         />
 
         <div className="grid gap-x-12 gap-y-2.5 sm:grid-cols-2">
-          <JobItem
-            title={resolveLocalized(USER.jobs[1].title, locale)}
-            company={USER.jobs[1].company}
-            website={USER.jobs[1].website}
-          />
-
           <IntroItem>
             <IntroItemIcon>
               {USER.gender === "male" ? <MarsIcon /> : <VenusIcon />}

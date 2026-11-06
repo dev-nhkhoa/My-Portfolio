@@ -4,6 +4,7 @@ export const EXPERIENCES: Experience[] = [
   {
     id: "vml",
     companyName: "VML Vietnam",
+    companyWebsite: "https://www.vml.com/vietnam",
     companyLogo: "/logos/vml-light.svg",
     companyLogoDark: "/logos/vml-dark.svg",
     positions: [
@@ -22,74 +23,12 @@ export const EXPERIENCES: Experience[] = [
         },
         icon: "code",
         isExpanded: true,
-        skills: [
-          "Artificial Intelligence (AI)",
-          "Large Language Model (LLM)",
-          "Workflow Automation",
-          "Business Analytics",
-        ],
+        description: {
+          en: "I lead AI-related projects at VML Vietnam and work on improving how the company operates, from day-to-day tasks to team-wide processes.",
+          vi: "Mình phụ trách các dự án liên quan đến AI tại VML Vietnam, đồng thời tối ưu công việc và quy trình vận hành của công ty, từ tác vụ hằng ngày đến quy trình chung của các nhóm.",
+        },
       },
     ],
     isCurrentEmployer: true,
   },
-  {
-    id: "aht-tech",
-    companyName: "AHT Tech",
-    companyLogo:
-      "https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/company_logos/bnuMovsJU7qsIR2NBw68wdgtCN9jl59v_1737512386____8e38d39c50f1ffc5ab349a913fe37e4d.png",
-    positions: [
-      {
-        id: "erp-functional-consultant-intern",
-        title: {
-          en: "Functional Consultant Intern",
-          vi: "Thực tập sinh tư vấn nghiệp vụ",
-        },
-        employmentPeriod: {
-          start: "05.2025",
-          end: "08.2025",
-        },
-        employmentType: {
-          en: "Internship",
-          vi: "Thực tập sinh",
-        },
-        icon: "business",
-        description: {
-          en: "Participated in requirement gathering to build an Odoo-based CRM module for a major coffee and franchise business in Vietnam.",
-          vi: "Tham gia thu thập yêu cầu để xây dựng module CRM trên nền tảng Odoo cho một doanh nghiệp cà phê và nhượng quyền lớn tại Việt Nam.",
-        },
-        skills: ["Business Analytics", "Enterprise Resource Planning (ERP)"],
-      },
-    ],
-  },
-  // {
-  //   id: "education",
-  //   companyName: "Education",
-  //   positions: [
-  //     {
-  //       id: "van-lang-university",
-  //       title: {
-  //         en: "Information Systems - Digital Transformation",
-  //         vi: "Ngành hệ thống Thông tin - Chuyển đổi số",
-  //       },
-  //       employmentPeriod: {
-  //         start: "2022",
-  //         end: "2026",
-  //       },
-  //       employmentType: {
-  //         en: "Bachelor's Degree",
-  //         vi: "Cử nhân",
-  //       },
-  //       icon: "education",
-  //       description: {
-  //         en: "- Graduate from Van Lang University.",
-  //         vi: "- Tốt nghiệp Trường Đại học Văn Lang.",
-  //       },
-  //       skills: [
-  //         "Artificial Intelligence (AI)",
-  //         "Large Language Model (LLM)",
-  //         "Business Analytics",
-  //       ],
-  //     }
-  //   ],
-  // },
 ];
